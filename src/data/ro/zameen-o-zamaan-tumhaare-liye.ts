@@ -1,0 +1,40 @@
+import type { Kalam } from "@/src/types";
+
+const kalam: Kalam = {
+  id: "ro-zameen-o-zamaan-tumhaare-liye",
+  poetId: "alahazrat",
+  poetName: "امام احمد رضا خان",
+  poetNameRo: "Imam Ahmed Raza Khan",
+  poetNameEn: "Imam Ahmed Raza Khan",
+  titleUr: "",
+  titleRo: "Zameen o Zamaañ Tumhaare Liye",
+  titleEn: "",
+  versesUr: [],
+  versesRo: [
+    { m1: "Zameen o Zamaañ Tumhaare Liye, Makeen o Makaañ Tumhaare Liye", m2: "Chuneen o Chunaañ Tumhaare Liye, Bane Do Jahaañ Tumhaare Liye" },
+    { m1: "Dahan Me Zabaañ Tumhaare Liye, Badan Me Hai Jaañ Tumhaare Liye", m2: "Ham Aaye Yahaañ Tumhaare Liye, Ut’theñ Bhi Wahaañ Tumhaare Liye" },
+    { m1: "Farishte Khadam Rasool Hasham Tamaam e Umam Ghulaam e Karam", m2: "Wujood o ’Adam Hudoos o Qidam Jahaañ Me ‘Ayaan Tumhaare Liye" },
+    { m1: "Kaleem o Najeeh, Maseeh o Safi, Khaleel o Razi, Rasool o Nabi", m2: "Ateeq o Wasi Ghani o Ali Sana Ki Zabaañ Tumhaare Liye" },
+    { m1: "Asaalat e Kul Imaamat e Kul Siyaadat e Kul Imaarat e Kul", m2: "Hukoomat e Kul Wilaayat e Kul Khuda Ke Yahaañ Tumhaare Liye" },
+    { m1: "Tumhaari Chamak Tumhaari Dhamak Tumhari Jhalak Tumhaari Mahak", m2: "Zameen o Falak Simaak o Samak Me Sik’kah Nishaañ Tumhaare Liye" },
+    { m1: "Ye Shams o Qamar Ye Shaam o Sahar Ye Barg o Shajar Ye Baagh o Samar", m2: "Ye Taigh o Sipar Ye Taaj o Kamar Ye Hukm e Rawaañ Tumhaare Liye" },
+    { m1: "Ye Faiz Diye Wo Jood Kiye Ke Naam Liye Zamaana Jiye", m2: "Jahaañ Ne Liye Tumhaare Diye Ye Ikramiyaañ Tumhaare Liye" },
+    { m1: "Sahaab e Karam Rawaana Kiye Ke Aab e Ni’am Zamaana Piye", m2: "Jo Rakhte Thay Ham Wo Chaak Siye Ye Satr e Badaañ Tumhaare Liye" },
+    { m1: "Sana Ka Nishaañ Wo Noor Fishaañ Ke Mehr Washaañ Ba Aañ-Hamah Shaañ", m2: "Ba-Saaya Kashaañ Mawaakib Shaañ Ye Naam o Nishaañ Tumhaare Liye" },
+    { m1: "‘Ataa e Arab Jala e Karab Fuyooz e ’Ajab Baghair e Talab", m2: "Ye Rahmat e Rab’b Hai Kis Ke Sabab Ba-Rab’b e Jahaañ Tumhaare Liye" },
+    { m1: "Zunoob e Fanaa ‘Uyoob e Haba Quloob e Safa Khutoob e Rawa", m2: "Ye Khoob e ’Ata Kuroob e Zuda Pa-e Dil o Jaañ Tumhaare Liye" },
+    { m1: "Na Jinn o Bashar Ke Aathoñ Pahar Mala’ika Dar Pe Basta Kamar", m2: "Na Jabha o Sar Ke Qalb o Jigar Haiñ Sajda Kunaañ Tumhaare Liye" },
+    { m1: "Na Rooh e Ameeñ Na ‘Arsh e Bareeñ Na Lauh e Mubeeñ Ko-ee Bhi Kaheeñ", m2: "Khabar Hee Nahiñ Jo Ramzeñ Khuleeñ Azal Ki Nihaañ Tumhaare Liye" },
+    { m1: "Jinaañ Me Chaman, Chaman Me Saman, Saman Me Phaban, Phaban Me Dulhan", m2: "Saza e Mihan Pe Aise Minan Ye Amn o Amaañ Tumhaare Liye" },
+    { m1: "Kamaal e Mihaañ Jalaal e Shahaañ Jamaal e Hisaañ Me Tum Ho ‘Iyaañ", m2: "Ke Saare Jahaañ Me Roz e Fakaañ Zil’l e Aa-ina Saañ Tumhaare Liye" },
+    { m1: "Ye Toor Kuja Siphar To Kya Ke ‘Arsh e Ulaa Bhi Door Raha", m2: "Jihat Se Wara Wisaal Mila Ye Rif’at e Shaañ Tumhaare Liye" },
+    { m1: "Khaleel o Naji, Maseeh o Safi, Sabhi Se Kahi, Kaheeñ Bhi Bani", m2: "Ye Be-Khabari Ke Khalq Phiri Kahaañ Se Kahaañ Tumhaare Liye" },
+    { m1: "Ba-Fawr e Sada Samaañ Ye Bandha Ye Sidra Ut’tha Wo ‘Arsh Jhuka", m2: "Sufoof e Sama Ne Sajda Kiya Huwi Jo Azaañ Tumhaare Liye" },
+    { m1: "Ye Marhamateñ Ke Kach’chi Mateñ Na Ch’horeñ Lateñ Na Apni Gateñ", m2: "Qusoor Kareñ Awr Un Se Bhareñ Qusoor e Jinaañ Tumhaare Liye" },
+    { m1: "Fanaa Ba-Darat Baqa Ba-Barat Ze Har Do Jihat Ba-Gird e Sarat", m2: "Hai Markaziy’yat Tumhaari Sifat Ke Donoñ Kamaañ Tumhaare Liye" },
+    { m1: "Ishaare Se Chaand Cheer Diya Ch’hupe Huwe Khur Ko Pheyr Liya", m2: "Gaye Huwe Din Ko ‘Asr Kiya Ye Taab o Tawaañ Tumhaare Liye" },
+    { m1: "Saba Wo Chale Ke Baagh Phale Wo Phool Khile Ke Din Hoñ Bhale", m2: "Liwa Ke Talay Sana Me Khule RAZA Ki Zabaañ Tumhaare Liye" },
+  ],
+};
+
+export default kalam;
