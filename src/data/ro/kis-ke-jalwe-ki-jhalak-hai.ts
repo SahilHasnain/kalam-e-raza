@@ -1,0 +1,43 @@
+import type { Kalam } from "@/src/types";
+
+const kalam: Kalam = {
+  id: "ro-kis-ke-jalwe-ki-jhalak-hai",
+  poetId: "alahazrat",
+  poetName: "امام احمد رضا خان",
+  poetNameRo: "Imam Ahmed Raza Khan",
+  poetNameEn: "Imam Ahmed Raza Khan",
+  titleUr: "",
+  titleRo: "Kis Ke Jalwe Ki Jhalak Hai Ye Ujaala Kya Hai",
+  titleEn: "",
+  versesUr: [],
+  versesRo: [
+    { m1: "Kis Ke Jalwe Ki Jhalak Hai Ye Ujaala Kya Hai", m2: "Har Taraf Deedah e Hayrat Zada Takta Kya Hai" },
+    { m1: "Maang Man Maanti Munh Maangi Muraadeñ Lega", m2: "Na Yahaañ 'Na' Hai Na Mangta Se Ye Kehna 'Kya Hai'" },
+    { m1: "Pand Kar'wi Lage Naaseh Se Na Tursh Ho Ay Nafs", m2: "Zehr e 'Isyaañ Me Sitamgar Tujhe Meetha Kya Hai" },
+    { m1: "Ham Haiñ Unke Wo Haiñ Tere To Huwe Ham Tere", m2: "Is Se Bar'h Kar Teri Samt Awr Wasila Kya Hai" },
+    { m1: "Un Ki Ummat Me Banaaya Unheñ Rahmat Bheja", m2: "Yuñ Na Farma Ke Tera Rahm Me Da'wa Kya Hai" },
+    { m1: "Sadqa Pyaare Ki Haya Ka Ke Na Le Mujh Se Hisaab", m2: "Bakhsh Be Pooche Lajaa-e Ko Lajaana Kya Hai" },
+    { m1: "Zaahid Un Ka Me Gunahgaar Wo Mere Shaafi'", m2: "Itni Nisbat Mujhe Kya Kam Hai, Tu Samjha Kya Hai" },
+    { m1: "Be-Basi Ho Jo Mujhe Pursish e A'maal Ke Waqt", m2: "Dosto! Kya Kahuñ Us Waqt Tamanna Kya Hai" },
+    { m1: "Kaash Faryaad Meri Sun Ke Ye Farmaa-eñ Huzoor", m2: "Haañ Ko-ee Dekho Ye Kya Shor Hai Ghogha Kya Hai" },
+    { m1: "Kaun Aafat Zada Hai Kis Pe Balaa Tooti Hai", m2: "Kis Musibat Me Giraftaar Hai Sadma Kya Hai" },
+    { m1: "Kis Se Kehta Hai Ke Lil'laah Khabar Lijiye Meri", m2: "Kyuñ Hai Be-Taab Ye Be-Chaini Ka Rona Kya Hai" },
+    { m1: "Us Ki Be-Chaini Se Hai Khaatir e Aqdas Pe Malaal", m2: "Be-Kasi Kaisi Hai Poocho Ko-ee Guzra Kya Hai" },
+    { m1: "Yuñ Malaa'ik Kareñ Ma'rooz Ki Ek Mujrim Hai", m2: "Us Se Pursish Hai Bata, Tu Ne Kiya Kya, Kya Hai" },
+    { m1: "Saamna Qahr Ka Hai Daftar e A'maal Hai Pesh", m2: "Dar Raha Hai Ke Khuda Hukm Sunaata Kya Hai" },
+    { m1: "Aap Se Karta Hai Faryaad Ke Ya Shah e Rusul", m2: "Banda Be-Kas Hai Shaha Rahm Me Waqfa Kya Hai" },
+    { m1: "Ab Ko-ee Dum Me Gariftaar e Bala Hota Huñ", m2: "Aap Aa Jaa-eñ To Kya Khauf Hai Khat'ka Kya Hai" },
+    { m1: "Sun Ke Ye 'Arz Meri Bahr e Karam Josh Me Aaye", m2: "Yuñ Malaa'ik Ko Ho Irshaad Teharna Kya Hai" },
+    { m1: "Kis Ko Tum Moorid e Aafaat Kiya Chaahate Ho", m2: "Ham Bhi To Aa Ke Zara Dekheñ Tamaasha Kya Hai" },
+    { m1: "Un Ki Aawaaz Pe Kar Ut'thuñ Me Be-Saakhta Shor", m2: "Awr Tar'ap Kar Ye Kahuñ Ab Mujhe Parwa Kya Hai" },
+    { m1: "Lo Wo Aaya Mera Haami Mera Gham-Khwaar e Umam!", m2: "Aagayi Jaañ Tan e Be-Jaañ Me Ye Aana Kya Hai" },
+    { m1: "Phir Mujhe Daaman e Aqdas Me Ch'hupa Leñ Sarwar", m2: "Awr Farmaa-eñ Hat'ow, Is Pe Taqaaza Kya Hai" },
+    { m1: "Banda Aazaad Shuda Hai Ye Hamaare Dar Ka", m2: "Kaisa Lete Ho Hisaab, Is Pe Tumhaara Kya Hai" },
+    { m1: "Ch'hor Kar Mujh Ko Farishte Kahe Mahkoom Haiñ Ham", m2: "Hukm e Waala Ki Na Ta'meel Ho, Zuhra Kya Hai" },
+    { m1: "Ye Samaañ Dekh Ke Mahshar Me Ut'thay Shor Ke, Waah!", m2: "Chashm e Bad Door Ho Kya Shaan Hai Rutbah Kya Hai" },
+    { m1: "Sadqe Us Rahm Ke Us Saaya e Daaman Pe Nisaar", m2: "Apne Bande Ko Musibat Se Bachaaya Kya Hai" },
+    { m1: "Ay RAZA Jaan e 'Anaadil Tere Naghmoñ Ke Nisaar", m2: "Bulbul e Baagh e Madina Tera Kehna Kya Hai" },
+  ],
+};
+
+export default kalam;

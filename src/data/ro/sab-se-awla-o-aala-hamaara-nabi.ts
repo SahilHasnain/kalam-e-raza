@@ -1,0 +1,41 @@
+import type { Kalam } from "@/src/types";
+
+const kalam: Kalam = {
+  id: "ro-sab-se-awla-o-aala-hamaara-nabi",
+  poetId: "alahazrat",
+  poetName: "امام احمد رضا خان",
+  poetNameRo: "Imam Ahmed Raza Khan",
+  poetNameEn: "Imam Ahmed Raza Khan",
+  titleUr: "",
+  titleRo: "Sab Se Awla o Aa'la Hamaara Nabi",
+  titleEn: "",
+  versesUr: [],
+  versesRo: [
+    { m1: "Sab Se Awla o Aa'la Hamaara Nabi", m2: "Sab Se Baala o Waala Hamaara Nabi" },
+    { m1: "Apne Maula Ka Pyaara Hamaara Nabi", m2: "Donoñ Aalam Ka Dulha Hamaara Nabi" },
+    { m1: "Bazm e Aakhir Ka Sham'a Farozaañ Huwa", m2: "Noor e Awwal Ka Jalwa Hamaara Nabi" },
+    { m1: "Jisko Shaayaañ Hai Arsh e Khuda Par Juloos", m2: "He Wo Sultaan e Waala Hamaara Nabi" },
+    { m1: "Bujh Ga-eeñ Jiske Aage Sabhi Mash'aleñ", m2: "Sham'a Wo Le Kar Aaya Hamaara Nabi" },
+    { m1: "Jis Ke Talwoñ Ka Dhowan He Aab e Hayaat", m2: "Hai Wo Jaan e Maseeha Hamaara Nabi" },
+    { m1: "Arsh o Kursi Ki Theeñ Aa-ina Bandiyaañ", m2: "Soo e Haq Jab Sidhaara Hamaara Nabi" },
+    { m1: "Khalq Se Awliya, Awliya Se Rusul", m2: "Awr Rasooloñ Se A'laa Hamaara Nabi" },
+    { m1: "Husn Khaata Hai Jis Ke Namak Ki Qasam", m2: "Wo Maleeh e Dil Aara Hamaara Nabi" },
+    { m1: "Zikr Sab Pheekay Jab Tak Na Mazkoor Ho", m2: "Namkeen Husn Waala Hamaara Nabi" },
+    { m1: "Jis Ki Do Boond Haiñ Kawthar o Salsabeel", m2: "Hai Wo Rahmat Ka Darya Hamaara Nabi" },
+    { m1: "Jaise Sab Ka Khuda Aik Hai Waise Hee", m2: "In Ka Un Ka Tumhaara Hamaara Nabi" },
+    { m1: "Qarnoñ Badli Rasooloñ Ki Hoti Rahi", m2: "Chaand Badli Ka Nikla Hamaara Nabi" },
+    { m1: "Kaun Deta Hai, Dene Ko Munh Chaahiye", m2: "Dene Waala Hai Sach'cha Hamaara Nabi" },
+    { m1: "Kya Khabar Kitne Taare Khilay Ch'hup Gaye", m2: "Par Na Doobe Na Dooba Hamaara Nabi" },
+    { m1: "Mulk e Kaunain Me Ambia Taajedaar", m2: "Taajedaaroñ Ka Aaqa Hamaara Nabi" },
+    { m1: "Laa-Makaañ Tak Ujaala Hai Jis Ka Wo Hai", m2: "Har Makaañ Ka Ujaala Hamaara Nabi" },
+    { m1: "Saare Ach'choñ Me Ach'cha Samajhiye Jisay", m2: "Hai Us Ach'che Se Ach'cha Hamaara Nabi" },
+    { m1: "Saare Oonchoñ Me Ooncha Samajhiye Jisay", m2: "Hai Us Oonche Se Ooncha Hamaara Nabi" },
+    { m1: "Ambia Se Karuñ Arz Kyuñ Maaliko!", m2: "Kya Nabi Hai Tumhaara Hamaara Nabi" },
+    { m1: "Jis Ne Tukray Kiye Haiñ Qamar Ke Wo Hai", m2: "Noor e Wahdat Ka Tukra Hamaara Nabi" },
+    { m1: "Sab Chamak Waale Ujloñ Me Chamka Kiye", m2: "Andhe Sheeshoñ Me Chamka Hamaara Nabi" },
+    { m1: "Jis Ne Murda Diloñ Ko Di Umr e Abad", m2: "Hai Wo Jaan e Maseeha Hamaara Nabi" },
+    { m1: "Ghamzadoñ Ko RAZA Muzhda Dije Ke Hai", m2: "Be-Kasoñ Ka Sahaara Hamaara Nabi" },
+  ],
+};
+
+export default kalam;
