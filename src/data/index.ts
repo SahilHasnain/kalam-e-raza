@@ -1,1 +1,3 @@
-export { default as kalams } from "./kalams";
+import type { Kalam } from "@/src/types";
+
+export const kalams: Kalam[] = [];

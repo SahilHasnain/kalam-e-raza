@@ -25,8 +25,8 @@ export type Kalam = {
   titleRo: string;
   titleHi?: string;
   titleEn?: string;
-  /** Urdu: flat misras (paired at render time). */
-  versesUr: string[];
+  /** Urdu: shers with explicit m1/m2. */
+  versesUr?: Sher[];
   /** Roman Urdu: shers with explicit m1/m2. */
   versesRo?: Sher[];
   versesHi?: string[];
