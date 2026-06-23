@@ -1,104 +1,158 @@
-import { View, Text, ScrollView, Pressable } from "react-native";
-import { useRouter } from "expo-router";
-import { colors, spacing, fontSize } from "@/src/constants/theme";
-import { kalams } from "@/src/data";
 import { KalamCard } from "@/src/components/KalamCard";
-import { NastaliqText } from "@/src/components/NastaliqText";
 import { LangSwitcher } from "@/src/components/LangSwitcher";
-import { useT } from "@/src/hooks/useT";
+import { borderRadius, colors, spacing } from "@/src/constants/theme";
 import { useLang } from "@/src/contexts/LangContext";
+import { kalams } from "@/src/data";
+import { LinearGradient } from "expo-linear-gradient";
+import { useRouter } from "expo-router";
+import { useMemo, useState } from "react";
+import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
-  const _ = useT();
   const { lang } = useLang();
-  const featured = kalams.slice(0, 4);
+  const [search, setSearch] = useState("");
+
+  const filtered = useMemo(() => {
+    if (!search.trim()) return kalams;
+    const q = search.toLowerCase();
+    return kalams.filter(
+      (k) =>
+        k.titleRo.toLowerCase().includes(q) ||
+        k.titleUr.includes(q) ||
+        k.versesUr?.some((v) => v.m1.includes(q) || v.m2.includes(q)) ||
+        k.versesRo?.some((v) => v.m1.toLowerCase().includes(q) || v.m2.toLowerCase().includes(q)),
+    );
+  }, [search]);
+
+  const isRtl = lang === "ur" || lang === "hi";
 
   return (
-    <ScrollView
-      style={{ flex: 1, backgroundColor: colors.cream }}
-      contentContainerStyle={{ paddingBottom: spacing["5xl"] }}
-    >
-      {/* Hero */}
-      <View
+    <View style={{ flex: 1, backgroundColor: colors.cream }}>
+      {/* Gradient Header */}
+      <LinearGradient
+        colors={["#0D5C3F", "#1A7A55", "#0D5C3F"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
         style={{
-          backgroundColor: colors.primary,
-          paddingHorizontal: spacing.xl,
           paddingTop: spacing["5xl"],
-          paddingBottom: spacing["3xl"],
+          paddingHorizontal: spacing.xl,
+          paddingBottom: spacing.lg,
         }}
       >
-        <NastaliqText
-          isRtl={lang === "ur"}
+        {/* Decorative circles */}
+        <View
           style={{
-            fontSize: 32,
-            color: colors.gold,
-            textAlign: "center",
-            lineHeight: 48,
+            position: "absolute",
+            width: 120,
+            height: 120,
+            borderRadius: 60,
+            backgroundColor: colors.gold,
+            top: -30,
+            left: -40,
+            opacity: 0.06,
           }}
-        >
-          {_("appName")}
-        </NastaliqText>
-        <Text
+        />
+        <View
           style={{
-            fontSize: fontSize.base,
-            color: colors.goldLight,
-            textAlign: "center",
-            marginTop: spacing.xs,
-            fontWeight: "500",
+            position: "absolute",
+            width: 80,
+            height: 80,
+            borderRadius: 40,
+            backgroundColor: colors.gold,
+            top: 20,
+            right: -20,
+            opacity: 0.05,
           }}
-        >
-          {_("appSubtitle")}
-        </Text>
+        />
 
-        <View style={{ marginTop: spacing.lg, alignItems: "center" }}>
+        {/* Top bar */}
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+            <View
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 10,
+                backgroundColor: colors.gold,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Text style={{ fontSize: 18, color: colors.primaryDark, fontWeight: "800" }}>
+                ک
+              </Text>
+            </View>
+            <Text style={{ fontSize: 16, fontWeight: "700", color: colors.gold }}>
+              Kalam-e-Raza
+            </Text>
+          </View>
           <LangSwitcher />
         </View>
-      </View>
 
-      {/* Section title */}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          paddingHorizontal: spacing.xl,
-          marginTop: spacing["2xl"],
-          marginBottom: spacing.md,
-        }}
-      >
-        <Text
+        {/* Search bar */}
+        <View
           style={{
-            fontSize: fontSize.lg,
-            fontWeight: "700",
-            color: colors.black,
+            flexDirection: "row",
+            alignItems: "center",
+            backgroundColor: colors.primaryLight,
+            borderRadius: borderRadius.md,
+            marginTop: spacing.lg,
+            paddingHorizontal: spacing.md,
           }}
         >
-          {_("featured")}
-        </Text>
-        <Pressable onPress={() => router.push("/(tabs)/browse")}>
-          <Text
+          <Text style={{ fontSize: 14, marginRight: spacing.sm }}>🔍</Text>
+          <TextInput
+            value={search}
+            onChangeText={setSearch}
+            placeholder="Search kalams..."
+            placeholderTextColor="rgba(255,255,255,0.5)"
             style={{
-              fontSize: fontSize.sm,
-              color: colors.primary,
-              fontWeight: "600",
+              flex: 1,
+              fontSize: 14,
+              color: colors.white,
+              paddingVertical: spacing.sm,
             }}
-          >
-            {_("seeAll")}
-          </Text>
-        </Pressable>
-      </View>
-
-      {/* Kalam list */}
-      <View style={{ paddingHorizontal: spacing.xl, gap: spacing.md }}>
-        {featured.map((kalam) => (
-          <KalamCard
-            key={kalam.id}
-            kalam={kalam}
-            onPress={() => router.push(`/kalam/${kalam.id}`)}
+            autoCapitalize="none"
+            autoCorrect={false}
           />
-        ))}
-      </View>
-    </ScrollView>
+          {search.length > 0 && (
+            <Pressable onPress={() => setSearch("")} hitSlop={8}>
+              <Text style={{ fontSize: 14, color: colors.goldLight }}>✕</Text>
+            </Pressable>
+          )}
+        </View>
+      </LinearGradient>
+
+      {/* All kalams list */}
+      <FlatList
+        data={filtered}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{
+          padding: spacing.xl,
+          gap: spacing.md,
+          paddingBottom: 100,
+        }}
+        ListEmptyComponent={
+          <View style={{ alignItems: "center", marginTop: 60 }}>
+            <Text style={{ fontSize: 16, color: colors.gray500 }}>
+              No kalams found
+            </Text>
+          </View>
+        }
+        renderItem={({ item }) => (
+          <KalamCard
+            kalam={item}
+            onPress={() => router.push(`/kalam/${item.id}`)}
+          />
+        )}
+      />
+    </View>
   );
 }

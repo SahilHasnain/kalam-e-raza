@@ -15,6 +15,12 @@ export type SherEn = {
   en: Sher;
 };
 
+/** A sher with Urdu source and Hindi transliteration. */
+export type SherHi = {
+  ur: Sher;
+  hi: Sher;
+};
+
 export type Kalam = {
   id: string;
   poetId: string;
@@ -29,7 +35,7 @@ export type Kalam = {
   versesUr?: Sher[];
   /** Roman Urdu: shers with explicit m1/m2. */
   versesRo?: Sher[];
-  versesHi?: string[];
+  versesHi?: SherHi[];
   /** English: shers with Ro source + En translation. */
   versesEn?: SherEn[];
 };

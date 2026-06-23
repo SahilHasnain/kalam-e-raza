@@ -1,7 +1,7 @@
 import { Tabs } from "expo-router";
 import { colors } from "@/src/constants/theme";
-import { useT } from "@/src/hooks/useT";
-import { View, Text } from "react-native";
+import { Text } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
   return (
@@ -12,7 +12,7 @@ function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
 }
 
 export default function TabLayout() {
-  const _ = useT();
+  const insets = useSafeAreaInsets();
 
   return (
     <Tabs
@@ -25,7 +25,8 @@ export default function TabLayout() {
           borderTopWidth: 1,
           borderTopColor: colors.gray200,
           paddingTop: 4,
-          height: 60,
+          height: 60 + insets.bottom,
+          paddingBottom: insets.bottom,
         },
         tabBarLabelStyle: {
           fontSize: 11,
@@ -37,28 +38,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: _("home"),
+          title: "Home",
           tabBarIcon: ({ focused }) => <TabIcon icon="⌂" focused={focused} />,
-        }}
-      />
-      <Tabs.Screen
-        name="browse"
-        options={{
-          title: _("browse"),
-          tabBarIcon: ({ focused }) => <TabIcon icon="☰" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="favorites"
         options={{
-          title: _("favorites"),
+          title: "Favorites",
           tabBarIcon: ({ focused }) => <TabIcon icon="♥" focused={focused} />,
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
-          title: _("about"),
+          title: "About",
           tabBarIcon: ({ focused }) => <TabIcon icon="ⓘ" focused={focused} />,
         }}
       />

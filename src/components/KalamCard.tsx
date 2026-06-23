@@ -12,7 +12,7 @@ type Props = {
 
 export function KalamCard({ kalam, onPress }: Props) {
   const { lang } = useLang();
-  const { title, poetName } = useKalamText();
+  const { title } = useKalamText();
   const isRtl = lang === "ur" || lang === "hi";
 
   return (
@@ -42,25 +42,6 @@ export function KalamCard({ kalam, onPress }: Props) {
         >
           {title(kalam)}
         </NastaliqText>
-        <Text
-          style={{
-            fontSize: 13,
-            color: colors.gray500,
-            marginTop: spacing.xs,
-          }}
-          numberOfLines={1}
-        >
-          {kalam.titleRo}
-        </Text>
-        <Text
-          style={{
-            fontSize: 11,
-            color: colors.gray400,
-            marginTop: spacing.md,
-          }}
-        >
-          {poetName(kalam)}
-        </Text>
       </View>
     </Pressable>
   );

@@ -1,5 +1,5 @@
 import { useLang } from "@/src/contexts/LangContext";
-import type { Kalam } from "@/src/types";
+import type { Kalam, Sher } from "@/src/types";
 
 export function useKalamText() {
   const { lang } = useLang();
@@ -13,12 +13,12 @@ export function useKalamText() {
     }
   }
 
-  function verses(kalam: Kalam): string[] {
+  function verses(kalam: Kalam): Sher[] {
     switch (lang) {
-      case "ur": return kalam.versesUr;
-      case "hi": return kalam.versesHi ?? kalam.versesUr;
-      case "ro": return kalam.versesRo ?? kalam.versesUr;
-      case "en": return kalam.versesEn ?? kalam.versesUr;
+      case "ur": return kalam.versesUr ?? [];
+      case "hi": return (kalam.versesHi ?? []).map((s) => s.hi);
+      case "ro": return kalam.versesRo ?? [];
+      case "en": return (kalam.versesEn ?? []).map((s) => s.en);
     }
   }
 
