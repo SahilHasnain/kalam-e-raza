@@ -4,17 +4,20 @@ import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
 import { useKalamText } from "@/src/hooks/useKalamText";
 import { useT } from "@/src/hooks/useT";
-import { BlurView } from "expo-blur";
+import { youtubeMap } from "@/src/data/youtube";
+
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { Modal, Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function KalamDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const _ = useT();
   const { lang } = useLang();
-  const { title, verses, poetName } = useKalamText();
+  const { title, verses: getVerses, poetName } = useKalamText();
   const { isFavorite, toggleFavorite } = useFavorites();
 
   const kalam = kalams.find((k) => k.id === id);
@@ -31,17 +34,12 @@ export default function KalamDetailScreen() {
   }
 
   const favorited = isFavorite(kalam.id);
-  const shes = kalam.versesRo?.length
-    ? kalam.versesRo
-    : kalam.versesEn?.length
-      ? kalam.versesEn.map((s) => s.en)
-      : kalam.versesUr?.length
-        ? kalam.versesUr
-        : kalam.versesHi?.length
-          ? kalam.versesHi.map((s) => s.hi)
-          : [];
+  const shes = getVerses(kalam);
   const isRtl = lang === "ur" || lang === "hi";
-  const sherCount = shes.length;
+  const videoIds = youtubeMap[kalam.id];
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [activePart, setActivePart] = useState(0);
+  const [playing, setPlaying] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -60,31 +58,7 @@ export default function KalamDetailScreen() {
         <View style={styles.decorativeCircle3} />
       </View>
 
-      {/* Header */}
-      <BlurView intensity={80} tint="dark" style={styles.header}>
-        <View style={styles.headerContent}>
-          <Pressable onPress={() => router.back()} hitSlop={20} style={styles.headerButton}>
-            <View style={styles.iconCircle}>
-              <Text style={styles.backIcon}>←</Text>
-            </View>
-          </Pressable>
 
-          <View style={styles.headerCenter}>
-            <Text style={styles.headerSubtitle}>{poetName(kalam)}</Text>
-            <Text style={styles.headerCount}>
-              {sherCount} {lang === "ur" ? "اشعار" : lang === "hi" ? "अश'आर" : "She'rs"}
-            </Text>
-          </View>
-
-          <Pressable onPress={() => toggleFavorite(kalam.id)} hitSlop={20} style={styles.headerButton}>
-            <View style={[styles.iconCircle, favorited && styles.iconCircleFavorited]}>
-              <Text style={[styles.heartIcon, favorited && styles.heartIconFavorited]}>
-                {favorited ? "♥" : "♡"}
-              </Text>
-            </View>
-          </Pressable>
-        </View>
-      </BlurView>
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}
@@ -98,13 +72,24 @@ export default function KalamDetailScreen() {
             <View style={styles.ornamentLine} />
           </View>
 
-          <Text style={[styles.title, isRtl && { writingDirection: "rtl" }]}>
-            {title(kalam)}
-          </Text>
+          <View style={styles.titleRow}>
+            <View style={styles.titleTextArea}>
+              <Text style={[styles.title, isRtl && { writingDirection: "rtl" }]}>
+                {title(kalam)}
+              </Text>
+              {kalam.titleRo && lang !== "ro" && lang !== "en" && (
+                <Text style={styles.titleRoman}>{kalam.titleRo}</Text>
+              )}
+            </View>
 
-          {kalam.titleRo && (
-            <Text style={styles.titleRoman}>{kalam.titleRo}</Text>
-          )}
+            <Pressable onPress={() => toggleFavorite(kalam.id)} hitSlop={12}>
+              <View style={[styles.titleFav, favorited && styles.titleFavFilled]}>
+                <Text style={[styles.titleFavHeart, favorited && styles.titleFavHeartFilled]}>
+                  {favorited ? "♥" : "♡"}
+                </Text>
+              </View>
+            </Pressable>
+          </View>
 
           <View style={styles.ornamentBottom}>
             <View style={styles.ornamentLine} />
@@ -112,6 +97,23 @@ export default function KalamDetailScreen() {
             <View style={styles.ornamentLine} />
           </View>
         </View>
+
+        {/* Video Button */}
+        {videoIds && videoIds.length > 0 && (
+          <Pressable
+            onPress={() => { setActivePart(0); setPlaying(false); setVideoOpen(true); }}
+            style={styles.videoButton}
+          >
+            <View style={styles.videoButtonIcon}>
+              <Text style={styles.videoButtonPlay}>▶</Text>
+            </View>
+            <View style={styles.videoButtonText}>
+              <Text style={styles.videoButtonLabel}>Video Explanation</Text>
+              <Text style={styles.videoButtonParts}>{videoIds.length} part{videoIds.length > 1 ? "s" : ""}</Text>
+            </View>
+            <Text style={styles.videoButtonArrow}>›</Text>
+          </Pressable>
+        )}
 
         {/* Verses with Premium Design */}
         <View style={styles.versesContainer}>
@@ -126,10 +128,6 @@ export default function KalamDetailScreen() {
               )}
 
               <View style={styles.verseCard}>
-                <View style={styles.verseNumber}>
-                  <Text style={styles.verseNumberText}>{si + 1}</Text>
-                </View>
-
                 <View style={styles.verseContent}>
                   <Text style={[styles.verseText, isRtl && { writingDirection: "rtl" }]}>
                     {sher.m1}
@@ -172,6 +170,62 @@ export default function KalamDetailScreen() {
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
+
+      {/* Video Bottom Sheet */}
+      <Modal
+        visible={videoOpen}
+        transparent
+        animationType="slide"
+        onRequestClose={() => setVideoOpen(false)}
+      >
+        <Pressable style={styles.sheetBackdrop} onPress={() => setVideoOpen(false)} />
+        <View style={styles.sheetContainer}>
+          {/* Handle */}
+          <View style={styles.sheetHandle}>
+            <View style={styles.sheetHandleBar} />
+          </View>
+
+          {/* Parts Tabs */}
+          {videoIds.length > 1 && (
+            <View style={styles.partTabs}>
+              {videoIds.map((_, vi) => (
+                <Pressable
+                  key={vi}
+                  onPress={() => { setActivePart(vi); setPlaying(false); }}
+                  style={[styles.partTab, activePart === vi && styles.partTabActive]}
+                >
+                  <Text style={[styles.partTabText, activePart === vi && styles.partTabTextActive]}>
+                    Part {vi + 1}
+                  </Text>
+                </Pressable>
+              ))}
+            </View>
+          )}
+
+          {/* Video Player */}
+          <View style={styles.sheetPlayerWrapper}>
+            <YoutubePlayer
+              videoId={videoIds[activePart]}
+              height={210}
+              play={playing}
+              onChangeState={(state: string) => {
+                if (state === "playing") setPlaying(true);
+                else if (state === "paused" || state === "ended") setPlaying(false);
+              }}
+              initialPlayerParams={{
+                controls: true,
+                modestbranding: true,
+                rel: false,
+              }}
+            />
+          </View>
+
+          {/* Close Button */}
+          <Pressable onPress={() => setVideoOpen(false)} style={styles.sheetClose}>
+            <Text style={styles.sheetCloseText}>Close</Text>
+          </Pressable>
+        </View>
+      </Modal>
     </View>
   );
 }
@@ -232,80 +286,24 @@ const styles = StyleSheet.create({
     right: -30,
     opacity: 0.08,
   },
-  header: {
-    paddingTop: 50,
-    paddingBottom: spacing.md,
-    paddingHorizontal: spacing.lg,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(201, 168, 76, 0.2)",
-  },
-  headerContent: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  headerButton: {
-    padding: spacing.xs,
-  },
-  iconCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 1,
-    borderColor: "rgba(255, 255, 255, 0.2)",
-  },
-  iconCircleFavorited: {
-    backgroundColor: "rgba(225, 29, 72, 0.2)",
-    borderColor: colors.favorite,
-  },
-  backIcon: {
-    fontSize: 20,
-    color: colors.white,
-    fontWeight: "600",
-  },
-  heartIcon: {
-    fontSize: 22,
-    color: "rgba(255, 255, 255, 0.7)",
-  },
-  heartIconFavorited: {
-    color: colors.favorite,
-  },
-  headerCenter: {
-    flex: 1,
-    alignItems: "center",
-    paddingHorizontal: spacing.md,
-  },
-  headerSubtitle: {
-    fontSize: 13,
-    color: colors.goldLight,
-    fontWeight: "600",
-    letterSpacing: 0.5,
-  },
-  headerCount: {
-    fontSize: 11,
-    color: "rgba(255, 255, 255, 0.6)",
-    marginTop: 2,
-  },
+
   scrollContent: {
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing["3xl"],
+    paddingTop: 60,
   },
   titleSection: {
     alignItems: "center",
-    marginBottom: spacing["4xl"],
+    marginBottom: spacing["2xl"],
   },
   ornamentTop: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: spacing.lg,
+    marginBottom: spacing.sm,
   },
   ornamentBottom: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: spacing.lg,
+    marginTop: spacing.sm,
   },
   ornamentLine: {
     width: 40,
@@ -337,101 +335,226 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     letterSpacing: 0.3,
   },
+  titleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+  },
+  titleTextArea: {
+    flex: 1,
+    alignItems: "center",
+  },
+  titleFav: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "rgba(255, 255, 255, 0.15)",
+  },
+  titleFavFilled: {
+    backgroundColor: "rgba(225, 29, 72, 0.2)",
+    borderColor: colors.favorite,
+  },
+  titleFavHeart: {
+    fontSize: 16,
+    color: "rgba(255, 255, 255, 0.5)",
+  },
+  titleFavHeartFilled: {
+    color: colors.favorite,
+  },
   versesContainer: {
-    marginBottom: spacing["3xl"],
+    marginBottom: spacing.lg,
   },
   verseDivider: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginVertical: spacing["2xl"],
+    marginVertical: spacing.md,
   },
   verseDividerLine: {
     flex: 1,
     height: 1,
     backgroundColor: colors.gold,
-    opacity: 0.25,
+    opacity: 0.2,
   },
   verseDividerDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
     backgroundColor: colors.gold,
-    marginHorizontal: spacing.md,
-    opacity: 0.5,
+    marginHorizontal: spacing.sm,
+    opacity: 0.4,
   },
   verseCard: {
     backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderRadius: borderRadius.xl,
-    padding: spacing["2xl"],
+    borderRadius: borderRadius.lg,
+    padding: spacing.md,
     borderWidth: 1,
     borderColor: "rgba(201, 168, 76, 0.2)",
     position: "relative",
   },
-  verseNumber: {
-    position: "absolute",
-    top: -12,
-    left: spacing.lg,
-    backgroundColor: colors.gold,
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 3,
-    borderColor: colors.primaryDark,
-  },
-  verseNumberText: {
-    fontSize: 12,
-    color: colors.primaryDark,
-    fontWeight: "700",
-  },
+
   verseContent: {
-    marginTop: spacing.xs,
+    marginTop: 0,
   },
   verseText: {
-    fontSize: 22,
-    lineHeight: 42,
+    fontSize: 18,
+    lineHeight: 30,
     color: colors.white,
     textAlign: "center",
     fontWeight: "400",
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
   verseText2: {
-    marginTop: spacing.xs,
+    marginTop: 2,
   },
   actionButtons: {
     alignItems: "center",
-    marginTop: spacing.lg,
+    marginTop: spacing.md,
   },
   shareButton: {
     borderRadius: borderRadius.xl,
     overflow: "hidden",
     shadowColor: colors.gold,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 12,
-    elevation: 8,
+    shadowOpacity: 0.25,
+    shadowRadius: 10,
+    elevation: 6,
   },
   shareGradient: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: spacing.lg,
-    paddingHorizontal: spacing["3xl"],
-    gap: spacing.sm,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing["2xl"],
+    gap: spacing.xs,
   },
   shareIcon: {
-    fontSize: 20,
+    fontSize: 18,
     color: colors.primaryDark,
   },
   shareText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "700",
     color: colors.primaryDark,
     letterSpacing: 0.5,
   },
+  videoButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(201, 168, 76, 0.12)",
+    borderRadius: borderRadius.xl,
+    padding: spacing.md,
+    marginBottom: spacing.lg,
+    borderWidth: 1,
+    borderColor: "rgba(201, 168, 76, 0.25)",
+  },
+  videoButtonIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "rgba(201, 168, 76, 0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: spacing.sm,
+  },
+  videoButtonPlay: {
+    fontSize: 14,
+    color: colors.gold,
+  },
+  videoButtonText: {
+    flex: 1,
+  },
+  videoButtonLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: colors.goldLight,
+  },
+  videoButtonParts: {
+    fontSize: 11,
+    color: "rgba(201, 168, 76, 0.6)",
+    marginTop: 1,
+  },
+  videoButtonArrow: {
+    fontSize: 18,
+    color: colors.gold,
+    opacity: 0.5,
+  },
+  sheetBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.6)",
+  },
+  sheetContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: colors.primaryDark,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    paddingBottom: 34,
+    maxHeight: "80%",
+  },
+  sheetHandle: {
+    alignItems: "center",
+    paddingVertical: spacing.md,
+  },
+  sheetHandleBar: {
+    width: 40,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: "rgba(255,255,255,0.2)",
+  },
+  partTabs: {
+    flexDirection: "row",
+    paddingHorizontal: spacing.lg,
+    gap: spacing.sm,
+    marginBottom: spacing.md,
+  },
+  partTab: {
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.md,
+    borderRadius: borderRadius.full,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+  },
+  partTabActive: {
+    backgroundColor: colors.gold,
+    borderColor: colors.gold,
+  },
+  partTabText: {
+    fontSize: 12,
+    fontWeight: "600",
+    color: "rgba(255,255,255,0.6)",
+  },
+  partTabTextActive: {
+    color: colors.primaryDark,
+  },
+  sheetPlayerWrapper: {
+    marginHorizontal: spacing.lg,
+    borderRadius: borderRadius.lg,
+    overflow: "hidden",
+  },
+  sheetClose: {
+    alignItems: "center",
+    paddingVertical: spacing.lg,
+    marginHorizontal: spacing.lg,
+    marginTop: spacing.md,
+    borderRadius: borderRadius.lg,
+    backgroundColor: "rgba(255,255,255,0.08)",
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.1)",
+  },
+  sheetCloseText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: colors.gray400,
+  },
   bottomSpacer: {
-    height: 60,
+    height: 40,
   },
 });

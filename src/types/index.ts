@@ -1,5 +1,8 @@
 export type Lang = "ur" | "hi" | "ro" | "en";
 
+/** Mapping from kalam ID to YouTube video ID(s). */
+export type YoutubeMap = Record<string, string[]>;
+
 /** A single misra (verse line). */
 export type Misra = string;
 

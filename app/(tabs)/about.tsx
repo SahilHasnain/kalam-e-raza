@@ -1,13 +1,9 @@
 import { View, Text, ScrollView } from "react-native";
 import { colors, spacing, borderRadius, fontSize } from "@/src/constants/theme";
-import { NastaliqText } from "@/src/components/NastaliqText";
 import { LangSwitcher } from "@/src/components/LangSwitcher";
-import { kalams } from "@/src/data";
-import { useT } from "@/src/hooks/useT";
 import { useLang } from "@/src/contexts/LangContext";
 
 export default function AboutScreen() {
-  const _ = useT();
   const { lang } = useLang();
 
   return (
@@ -49,52 +45,7 @@ export default function AboutScreen() {
         </View>
       </View>
 
-      {/* Stats */}
-      <View
-        style={{
-          flexDirection: "row",
-          marginHorizontal: spacing.xl,
-          marginTop: spacing.lg,
-          gap: spacing.md,
-        }}
-      >
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.white,
-            borderRadius: borderRadius.lg,
-            padding: spacing.lg,
-            alignItems: "center",
-            borderWidth: 1,
-            borderColor: colors.gray200,
-          }}
-        >
-          <Text style={{ fontSize: fontSize["3xl"], fontWeight: "800", color: colors.primary }}>
-            {kalams.length}
-          </Text>
-          <Text style={{ fontSize: fontSize.xs, color: colors.gray500, marginTop: spacing.xs }}>
-            {_("kalams")}
-          </Text>
-        </View>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: colors.white,
-            borderRadius: borderRadius.lg,
-            padding: spacing.lg,
-            alignItems: "center",
-            borderWidth: 1,
-            borderColor: colors.gray200,
-          }}
-        >
-          <Text style={{ fontSize: fontSize["3xl"], fontWeight: "800", color: colors.primary }}>
-            1856–1921
-          </Text>
-          <Text style={{ fontSize: fontSize.xs, color: colors.gray500, marginTop: spacing.xs }}>
-            Life
-          </Text>
-        </View>
-      </View>
+
 
       {/* Bio */}
       <View
@@ -108,14 +59,11 @@ export default function AboutScreen() {
           borderColor: colors.gray200,
         }}
       >
-        <NastaliqText
-          isRtl
-          style={{ fontSize: 24, color: colors.primary, textAlign: "center", lineHeight: 38 }}
-        >
-          اعلیٰ حضرت امام احمد رضا خان
-        </NastaliqText>
+        <Text style={{ fontSize: 22, fontWeight: "700", color: colors.primary, textAlign: "center" }}>
+          Imam Ahmed Raza Khan
+        </Text>
         <Text style={{ fontSize: fontSize.sm, color: colors.gray500, textAlign: "center", marginTop: spacing.xs }}>
-          Imam Ahmed Raza Khan (1856–1921)
+          1856 – 1921
         </Text>
 
         <View
@@ -140,29 +88,7 @@ export default function AboutScreen() {
         </Text>
       </View>
 
-      {/* App Info */}
-      <View
-        style={{
-          marginHorizontal: spacing.xl,
-          marginTop: spacing.lg,
-          backgroundColor: colors.white,
-          borderRadius: borderRadius.lg,
-          padding: spacing.xl,
-          borderWidth: 1,
-          borderColor: colors.gray200,
-          alignItems: "center",
-        }}
-      >
-        <Text style={{ fontSize: fontSize.base, fontWeight: "700", color: colors.black }}>
-          {_("appName")}
-        </Text>
-        <Text style={{ fontSize: fontSize.sm, color: colors.gray500, marginTop: spacing.xs }}>
-          {_("version")} 1.0.0
-        </Text>
-        <Text style={{ fontSize: fontSize.xs, color: colors.gray400, marginTop: spacing.md, textAlign: "center" }}>
-          {_("appDescription")}
-        </Text>
-      </View>
+
     </ScrollView>
   );
 }

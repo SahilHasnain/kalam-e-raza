@@ -1,15 +1,7 @@
 import { Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 import { colors } from "@/src/constants/theme";
-import { Text } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-
-function TabIcon({ icon, focused }: { icon: string; focused: boolean }) {
-  return (
-    <Text style={{ fontSize: 20, color: focused ? colors.primary : colors.gray400 }}>
-      {icon}
-    </Text>
-  );
-}
 
 export default function TabLayout() {
   const insets = useSafeAreaInsets();
@@ -39,21 +31,27 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
-          tabBarIcon: ({ focused }) => <TabIcon icon="⌂" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused ? "home" : "home-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+          ),
         }}
       />
       <Tabs.Screen
         name="favorites"
         options={{
           title: "Favorites",
-          tabBarIcon: ({ focused }) => <TabIcon icon="♥" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused ? "heart" : "heart-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+          ),
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
           title: "About",
-          tabBarIcon: ({ focused }) => <TabIcon icon="ⓘ" focused={focused} />,
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused ? "information-circle" : "information-circle-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+          ),
         }}
       />
     </Tabs>

@@ -85,7 +85,7 @@ export default function FavoritesScreen() {
             </Pressable>
           </View>
         }
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <Pressable
             onPress={() => router.push(`/kalam/${item.id}`)}
             style={styles.kalamCard}
@@ -99,11 +99,6 @@ export default function FavoritesScreen() {
                 <Text style={styles.favoriteBadgeIcon}>♥</Text>
               </View>
 
-              {/* Position Number */}
-              <View style={styles.positionNumber}>
-                <Text style={styles.positionNumberText}>{index + 1}</Text>
-              </View>
-
               {/* Content */}
               <View style={styles.cardContent}>
                 <NastaliqText
@@ -113,9 +108,11 @@ export default function FavoritesScreen() {
                 >
                   {title(item)}
                 </NastaliqText>
-                <Text style={styles.kalamRoman} numberOfLines={1}>
-                  {item.titleRo}
-                </Text>
+                {item.titleRo && lang !== "ro" && lang !== "en" && (
+                  <Text style={styles.kalamRoman} numberOfLines={1}>
+                    {item.titleRo}
+                  </Text>
+                )}
 
                 <View style={styles.cardFooter}>
                   <Text style={styles.verseCount}>
@@ -294,27 +291,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.white,
   },
-  positionNumber: {
-    position: "absolute",
-    top: spacing.md,
-    left: spacing.md,
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    backgroundColor: "rgba(225, 29, 72, 0.1)",
-    borderWidth: 1.5,
-    borderColor: colors.favorite,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  positionNumberText: {
-    fontSize: 12,
-    fontWeight: "700",
-    color: colors.favorite,
-  },
   cardContent: {
     paddingRight: spacing["2xl"],
-    paddingTop: spacing.md,
   },
   kalamTitle: {
     fontSize: 18,
