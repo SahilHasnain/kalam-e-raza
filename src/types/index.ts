@@ -12,12 +12,6 @@ export type Sher = {
   m2: Misra;
 };
 
-/** A sher with both Roman Urdu source and English translation. */
-export type SherEn = {
-  ro: Sher;
-  en: Sher;
-};
-
 /** A sher with Urdu source and Hindi transliteration. */
 export type SherHi = {
   ur: Sher;
@@ -39,6 +33,6 @@ export type Kalam = {
   /** Roman Urdu: shers with explicit m1/m2. */
   versesRo?: Sher[];
   versesHi?: SherHi[];
-  /** English: shers with Ro source + En translation. */
-  versesEn?: SherEn[];
+  /** English: shers with En translation. */
+  versesEn?: Sher[];
 };

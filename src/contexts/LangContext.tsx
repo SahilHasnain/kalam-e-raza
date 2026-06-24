@@ -7,12 +7,12 @@ type LangContextType = {
 };
 
 const LangContext = createContext<LangContextType>({
-  lang: "ur",
+  lang: "ro",
   setLang: () => {},
 });
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("ur");
+  const [lang, setLang] = useState<Lang>("ro");
 
   return (
     <LangContext.Provider value={{ lang, setLang }}>

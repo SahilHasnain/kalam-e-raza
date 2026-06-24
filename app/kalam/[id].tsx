@@ -3,7 +3,7 @@ import { useFavorites } from "@/src/contexts/FavoritesContext";
 import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
 import { useKalamText } from "@/src/hooks/useKalamText";
-import { useT } from "@/src/hooks/useT";
+
 import { youtubeMap } from "@/src/data/youtube";
 
 import { LinearGradient } from "expo-linear-gradient";
@@ -15,7 +15,6 @@ import YoutubePlayer from "react-native-youtube-iframe";
 export default function KalamDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
-  const _ = useT();
   const { lang } = useLang();
   const { title, verses: getVerses, poetName } = useKalamText();
   const { isFavorite, toggleFavorite } = useFavorites();
@@ -25,9 +24,9 @@ export default function KalamDetailScreen() {
   if (!kalam) {
     return (
       <View style={styles.notFoundContainer}>
-        <Text style={styles.notFoundText}>{_("kalamNotFound")}</Text>
+        <Text style={styles.notFoundText}>Kalam not found</Text>
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.notFoundButton}>{_("goBack")}</Text>
+          <Text style={styles.notFoundButton}>Go Back</Text>
         </Pressable>
       </View>
     );
@@ -74,7 +73,7 @@ export default function KalamDetailScreen() {
 
           <View style={styles.titleRow}>
             <View style={styles.titleTextArea}>
-              <Text style={[styles.title, isRtl && { writingDirection: "rtl" }]}>
+              <Text style={[styles.title, isRtl && { writingDirection: "rtl" }]} numberOfLines={3}>
                 {title(kalam)}
               </Text>
               {kalam.titleRo && lang !== "ro" && lang !== "en" && (
@@ -163,7 +162,7 @@ export default function KalamDetailScreen() {
               end={{ x: 1, y: 0 }}
             >
               <Text style={styles.shareIcon}>⎙</Text>
-              <Text style={styles.shareText}>{_("shareThisKalam")}</Text>
+              <Text style={styles.shareText}>Share</Text>
             </LinearGradient>
           </Pressable>
         </View>

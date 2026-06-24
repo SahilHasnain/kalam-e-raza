@@ -5,9 +5,7 @@ import { colors, borderRadius, spacing } from "@/src/constants/theme";
 import type { Lang } from "@/src/types";
 
 const LANGS: { key: Lang; label: string }[] = [
-  { key: "ur", label: "اردو" },
-  { key: "hi", label: "हिन्दी" },
-  { key: "ro", label: "Roman" },
+  { key: "ro", label: "Roman Urdu" },
   { key: "en", label: "English" },
 ];
 

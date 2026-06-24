@@ -19,12 +19,12 @@ export function useKalamText() {
         case "ur": return kalam.versesUr;
         case "hi": return kalam.versesHi?.map((s) => s.hi);
         case "ro": return kalam.versesRo;
-        case "en": return kalam.versesEn?.map((s) => s.en);
+        case "en": return kalam.versesEn;
       }
     })();
     if (pref?.length) return pref;
     if (kalam.versesRo?.length) return kalam.versesRo;
-    if (kalam.versesEn?.length) return kalam.versesEn.map((s) => s.en);
+    if (kalam.versesEn?.length) return kalam.versesEn;
     if (kalam.versesUr?.length) return kalam.versesUr;
     return kalam.versesHi?.map((s) => s.hi) ?? [];
   }
