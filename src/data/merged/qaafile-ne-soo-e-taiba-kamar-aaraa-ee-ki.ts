@@ -6,7 +6,7 @@ const kalam: Kalam = {
   poetName: "امام احمد رضا خان",
   poetNameRo: "Imam Ahmed Raza Khan",
   poetNameEn: "Imam Ahmed Raza Khan",
-  titleUr: "",
+  titleUr: "قافلے نے سُوئے طیبہ کمر آرائی کی",
   titleRo: "Qaafile Ne Soo e Taiba Kamar Aaraa-ee Ki",
   titleEn: "While To Journey Towards Taiba, The Travel Convoy Has Made Its Intention",
   titleHi: "",
@@ -70,7 +70,15 @@ const kalam: Kalam = {
       "m2": "Yet In My Humble Heart There Is A Place, In Which Resides His Universal Manifestation"
     }
   ],
-  versesUr: [],
+  versesUr: [
+    { m1: `قافلے نے سُوئے طیبہ کمر آرائی کی`, m2: `مشکل آسان الہٰی مری تنہائی کی` },
+    { m1: `لاج رکھ لی طمعِ عفو کے سودائی کی`, m2: `اے میں قرباں مِرے آقا بڑی آقائی کی` },
+    { m1: `فرش تا عرش سب آئینہ ضمائر حاضِر`, m2: `بس قسم کھائیے اُمّی تِری دانائی کی` },
+    { m1: `شش جہت سمت مقابل شب و روز ایک ہی حال`, m2: `دُھوم وَالنَّجم میں ہے آپ کی بِینائی کی` },
+    { m1: `پانسو۵۰۰ سال کی راہ ایسی ہے جیسے دو گام`, m2: `آس ہم کو بھی لگی ہے تِری شنوائی کی` },
+    { m1: `چاند اشارے کا ہلا حکم کا باندھا سورج`, m2: `واہ کیا بات شہا تیری توانائی کی` },
+    { m1: `تنگ ٹھہری ہے رضاؔ جس کے لئے وُسعتِ عرش`, m2: `بس جگہ دل میں ہے اس جَلوۂ ہرجائی کی` },
+  ],
   versesHi: [],
 };
 

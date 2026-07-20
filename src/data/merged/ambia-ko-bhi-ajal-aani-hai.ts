@@ -6,7 +6,7 @@ const kalam: Kalam = {
   poetName: "امام احمد رضا خان",
   poetNameRo: "Imam Ahmed Raza Khan",
   poetNameEn: "Imam Ahmed Raza Khan",
-  titleUr: "",
+  titleUr: "اَنبیا کو بھی اَجل آنی ہے",
   titleRo: "Ambia Ko Bhi Ajal Aani Hai",
   titleEn: "The Ambia Also Have To Pass Away Ultimately, But Such That It Is Only Momentarily",
   titleHi: "",
@@ -70,7 +70,15 @@ const kalam: Kalam = {
       "m2": "We Accept That Their Passing, Is To Fulfill The Word Of The Almighty"
     }
   ],
-  versesUr: [],
+  versesUr: [
+    { m1: `اَنبیا کو بھی اَجل آنی ہے`, m2: `مگر ایسی کہ فقط آنی ہے` },
+    { m1: `پھر اُسی آن کے بعد اُن کی حیات`, m2: `مثلِ سابق وہی جسمانی ہے` },
+    { m1: `روح تو سب کی ہے زندہ ان کا`, m2: `جسمِ پُرنور بھی روحانی ہے` },
+    { m1: `اوروں کی روح ہو کتنی ہی لطیف`, m2: `اُن کے اَجسام کی کب ثانی ہے` },
+    { m1: `پاؤں جس خاک پہ رکھ دیں وہ بھی`, m2: `روح ہے پاک ہے نورانی ہے` },
+    { m1: `اُس کی اَزواج کو جائز ہے نکاح`, m2: `اُس کا ترکہ بٹے جو فانی ہے` },
+    { m1: `یہ ہیں حَیِّ اَبدی ان کو رضاؔ`, m2: `صدقِ وعدہ کی قضا مانی ہے` },
+  ],
   versesHi: [],
 };
 

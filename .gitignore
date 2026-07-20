@@ -47,3 +47,6 @@ app-example
 /ios
 /android
 config.bat
+
+# reference (APK decompilation tools + data)
+reference/

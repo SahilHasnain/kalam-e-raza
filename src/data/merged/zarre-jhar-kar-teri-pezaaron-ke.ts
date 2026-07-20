@@ -6,7 +6,7 @@ const kalam: Kalam = {
   poetName: "امام احمد رضا خان",
   poetNameRo: "Imam Ahmed Raza Khan",
   poetNameEn: "Imam Ahmed Raza Khan",
-  titleUr: "",
+  titleUr: "ذرّے جھڑ کر تری پیزاروں کے",
   titleRo: "Zar're Jhar Kar Teri Pezaaroñ Ke",
   titleEn: "From Your Sacred Footwear, The Sacred Dust Particles Which Are Falling",
   titleHi: "",
@@ -94,7 +94,18 @@ const kalam: Kalam = {
       "m2": "In The Heights, My Master’s Distinction & Honour Is Flying"
     }
   ],
-  versesUr: [],
+  versesUr: [
+    { m1: `ذرّے جھڑ کر تری پیزاروں کے`, m2: `تاجِ سر بنتے ہیں سَیّاروں کے` },
+    { m1: `ہم سے چوروں پہ جو فرمائیں کرم`, m2: `خِلْعَتِ زر بنیں پُشتاروں کے` },
+    { m1: `میرے آقا کا وہ در ہے جس پر`, m2: `ماتھے گھس جاتے ہیں سرداروں کے` },
+    { m1: `میرے عیسیٰ تِرے صدقے جاؤں`, m2: `طور بے طور ہیں بیماروں کے` },
+    { m1: `مجرمو ! چشمِ تبسم رکھو`, m2: `پھول بن جاتے ہیں انگاروں کے` },
+    { m1: `تیرے اَبرو کے تَصَدُّق پیارے`, m2: `بند کرّے ہیں گرفتاروں کے` },
+    { m1: `جان و دل تیرے قدم پر وارے`, m2: `کیا نصیبے ہیں ترے یاروں کے` },
+    { m1: `صِدق و عَدل و کرم و ہمّت میں`, m2: `چار سو شُہرے ہیں اِن چاروں کے` },
+    { m1: `بہرِ تَسلیمِ علی میداں میں`, m2: `سر جھکے رہتے ہیں تلواروں کے` },
+    { m1: `کیسے آقاؤں کا بندہ ہوں رضاؔ`, m2: `بول بالے مِری سرکاروں کے` },
+  ],
   versesHi: [],
 };
 

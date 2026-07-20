@@ -18,12 +18,89 @@ import hirz_e_jaan_zikr_e_shafaat_kijiye from "@/src/data/merged/hirz-e-jaan-zik
 import imaan_e_qaal_e_mustafa_ee from "@/src/data/merged/imaan-e-qaal-e-mustafa-ee";
 import jo_tera_tifl_hai_kaamil_hai_ya_ghaus from "@/src/data/merged/jo-tera-tifl-hai-kaamil-hai-ya-ghaus";
 import kaabe_ke_badrud_duja from "@/src/data/merged/kaabe-ke-badrud-duja";
+import kalam_1 from "@/src/data/merged/kalam-1";
+import kalam_10 from "@/src/data/merged/kalam-10";
+import kalam_100 from "@/src/data/merged/kalam-100";
+import kalam_102 from "@/src/data/merged/kalam-102";
+import kalam_103 from "@/src/data/merged/kalam-103";
+import kalam_105 from "@/src/data/merged/kalam-105";
+import kalam_107 from "@/src/data/merged/kalam-107";
+import kalam_11 from "@/src/data/merged/kalam-11";
+import kalam_115 from "@/src/data/merged/kalam-115";
+import kalam_116 from "@/src/data/merged/kalam-116";
+import kalam_117 from "@/src/data/merged/kalam-117";
+import kalam_118 from "@/src/data/merged/kalam-118";
+import kalam_119 from "@/src/data/merged/kalam-119";
+import kalam_12 from "@/src/data/merged/kalam-12";
+import kalam_120 from "@/src/data/merged/kalam-120";
+import kalam_121 from "@/src/data/merged/kalam-121";
+import kalam_122 from "@/src/data/merged/kalam-122";
+import kalam_123 from "@/src/data/merged/kalam-123";
+import kalam_125 from "@/src/data/merged/kalam-125";
+import kalam_126 from "@/src/data/merged/kalam-126";
+import kalam_127 from "@/src/data/merged/kalam-127";
+import kalam_13 from "@/src/data/merged/kalam-13";
+import kalam_133 from "@/src/data/merged/kalam-133";
+import kalam_134 from "@/src/data/merged/kalam-134";
+import kalam_135 from "@/src/data/merged/kalam-135";
+import kalam_14 from "@/src/data/merged/kalam-14";
+import kalam_15 from "@/src/data/merged/kalam-15";
+import kalam_16 from "@/src/data/merged/kalam-16";
+import kalam_17 from "@/src/data/merged/kalam-17";
+import kalam_18 from "@/src/data/merged/kalam-18";
+import kalam_19 from "@/src/data/merged/kalam-19";
+import kalam_2 from "@/src/data/merged/kalam-2";
+import kalam_20 from "@/src/data/merged/kalam-20";
+import kalam_21 from "@/src/data/merged/kalam-21";
+import kalam_22 from "@/src/data/merged/kalam-22";
+import kalam_224 from "@/src/data/merged/kalam-224";
+import kalam_226 from "@/src/data/merged/kalam-226";
+import kalam_23 from "@/src/data/merged/kalam-23";
+import kalam_24 from "@/src/data/merged/kalam-24";
+import kalam_241 from "@/src/data/merged/kalam-241";
+import kalam_242 from "@/src/data/merged/kalam-242";
+import kalam_245 from "@/src/data/merged/kalam-245";
+import kalam_246 from "@/src/data/merged/kalam-246";
+import kalam_247 from "@/src/data/merged/kalam-247";
+import kalam_25 from "@/src/data/merged/kalam-25";
+import kalam_250 from "@/src/data/merged/kalam-250";
+import kalam_251 from "@/src/data/merged/kalam-251";
+import kalam_26 from "@/src/data/merged/kalam-26";
+import kalam_27 from "@/src/data/merged/kalam-27";
+import kalam_28 from "@/src/data/merged/kalam-28";
+import kalam_29 from "@/src/data/merged/kalam-29";
+import kalam_3 from "@/src/data/merged/kalam-3";
+import kalam_30 from "@/src/data/merged/kalam-30";
+import kalam_31 from "@/src/data/merged/kalam-31";
+import kalam_32 from "@/src/data/merged/kalam-32";
+import kalam_33 from "@/src/data/merged/kalam-33";
+import kalam_34 from "@/src/data/merged/kalam-34";
+import kalam_35 from "@/src/data/merged/kalam-35";
+import kalam_36 from "@/src/data/merged/kalam-36";
+import kalam_37 from "@/src/data/merged/kalam-37";
+import kalam_4 from "@/src/data/merged/kalam-4";
+import kalam_5 from "@/src/data/merged/kalam-5";
+import kalam_6 from "@/src/data/merged/kalam-6";
+import kalam_64 from "@/src/data/merged/kalam-64";
+import kalam_65 from "@/src/data/merged/kalam-65";
+import kalam_66 from "@/src/data/merged/kalam-66";
+import kalam_7 from "@/src/data/merged/kalam-7";
+import kalam_71 from "@/src/data/merged/kalam-71";
+import kalam_73 from "@/src/data/merged/kalam-73";
+import kalam_74 from "@/src/data/merged/kalam-74";
+import kalam_76 from "@/src/data/merged/kalam-76";
+import kalam_77 from "@/src/data/merged/kalam-77";
+import kalam_78 from "@/src/data/merged/kalam-78";
+import kalam_8 from "@/src/data/merged/kalam-8";
+import kalam_9 from "@/src/data/merged/kalam-9";
+import kalam_92 from "@/src/data/merged/kalam-92";
+import kalam_93 from "@/src/data/merged/kalam-93";
+import kalam_95 from "@/src/data/merged/kalam-95";
 import kis_ke_jalwe_ki_jhalak_hai from "@/src/data/merged/kis-ke-jalwe-ki-jhalak-hai";
 import kya_mahakte_hain_mahakne_waale from "@/src/data/merged/kya-mahakte-hain-mahakne-waale";
 import lahad_me_ishq_e_rukh_e_shah_ka_daagh_le_ke_chale from "@/src/data/merged/lahad-me-ishq-e-rukh-e-shah-ka-daagh-le-ke-chale";
 import milk_e_khaas_e_kibriya from "@/src/data/merged/milk-e-khaas-e-kibriya";
 import momin_wo_hai_jo_un_ki_izzat_pe_mare_dil_se from "@/src/data/merged/momin-wo-hai-jo-un-ki-izzat-pe-mare-dil-se";
-import mustafa_jaan_e_rahmat_pe_laakho__salaam from "@/src/data/merged/mustafa-jaan-e-rahmat-pe-laakhoñ-salaam";
 import mustafa_khayr_ul_wara_ho from "@/src/data/merged/mustafa-khayr-ul-wara-ho";
 import muzhdah_baad_ay_aasiyo_shafee_shah_e_abraar_hai from "@/src/data/merged/muzhdah-baad-ay-aasiyo-shafee-shah-e-abraar-hai";
 import na_arsh_e_aiman from "@/src/data/merged/na-arsh-e-aiman";
@@ -72,12 +149,89 @@ export const kalams: Kalam[] = [
   imaan_e_qaal_e_mustafa_ee,
   jo_tera_tifl_hai_kaamil_hai_ya_ghaus,
   kaabe_ke_badrud_duja,
+  kalam_1,
+  kalam_10,
+  kalam_100,
+  kalam_102,
+  kalam_103,
+  kalam_105,
+  kalam_107,
+  kalam_11,
+  kalam_115,
+  kalam_116,
+  kalam_117,
+  kalam_118,
+  kalam_119,
+  kalam_12,
+  kalam_120,
+  kalam_121,
+  kalam_122,
+  kalam_123,
+  kalam_125,
+  kalam_126,
+  kalam_127,
+  kalam_13,
+  kalam_133,
+  kalam_134,
+  kalam_135,
+  kalam_14,
+  kalam_15,
+  kalam_16,
+  kalam_17,
+  kalam_18,
+  kalam_19,
+  kalam_2,
+  kalam_20,
+  kalam_21,
+  kalam_22,
+  kalam_224,
+  kalam_226,
+  kalam_23,
+  kalam_24,
+  kalam_241,
+  kalam_242,
+  kalam_245,
+  kalam_246,
+  kalam_247,
+  kalam_25,
+  kalam_250,
+  kalam_251,
+  kalam_26,
+  kalam_27,
+  kalam_28,
+  kalam_29,
+  kalam_3,
+  kalam_30,
+  kalam_31,
+  kalam_32,
+  kalam_33,
+  kalam_34,
+  kalam_35,
+  kalam_36,
+  kalam_37,
+  kalam_4,
+  kalam_5,
+  kalam_6,
+  kalam_64,
+  kalam_65,
+  kalam_66,
+  kalam_7,
+  kalam_71,
+  kalam_73,
+  kalam_74,
+  kalam_76,
+  kalam_77,
+  kalam_78,
+  kalam_8,
+  kalam_9,
+  kalam_92,
+  kalam_93,
+  kalam_95,
   kis_ke_jalwe_ki_jhalak_hai,
   kya_mahakte_hain_mahakne_waale,
   lahad_me_ishq_e_rukh_e_shah_ka_daagh_le_ke_chale,
   milk_e_khaas_e_kibriya,
   momin_wo_hai_jo_un_ki_izzat_pe_mare_dil_se,
-  mustafa_jaan_e_rahmat_pe_laakho__salaam,
   mustafa_khayr_ul_wara_ho,
   muzhdah_baad_ay_aasiyo_shafee_shah_e_abraar_hai,
   na_arsh_e_aiman,
@@ -105,6 +259,5 @@ export const kalams: Kalam[] = [
   wohi_rabb_hai_jis_ne_tujh_ko_hama_tan_karam_banaaya,
   ya_ilaahi_rahm_farma_mustafa_ke_waaste,
   zameen_o_zamaan_tumhaare_liye,
-  zarre_jhar_kar_teri_pezaaron_ke
+  zarre_jhar_kar_teri_pezaaron_ke,
 ];
-
