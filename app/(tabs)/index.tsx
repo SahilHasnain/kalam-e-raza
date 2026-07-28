@@ -111,7 +111,7 @@ export default function HomeScreen() {
           <TextInput
             value={search}
             onChangeText={setSearch}
-            placeholder="Search kalams..."
+            placeholder={lang === "ur" ? "تلاش کریں..." : lang === "hi" ? "खोजें..." : "Search kalams..."}
             placeholderTextColor="rgba(255,255,255,0.5)"
             style={{
               flex: 1,

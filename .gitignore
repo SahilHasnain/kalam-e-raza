@@ -7,6 +7,7 @@ node_modules/
 # generated data files
 scripts/*.json
 scripts/*.log
+keystore-base64.txt
 
 # Expo
 .expo/
@@ -45,7 +46,6 @@ app-example
 
 # generated native folders
 /ios
-/android
 config.bat
 
 # reference (APK decompilation tools + data)

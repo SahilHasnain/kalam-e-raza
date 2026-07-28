@@ -1,0 +1,211 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.3
+2 info using node@v22.19.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\.npmrc
+5 silly config load:file:C:\Users\MD SAHIL HASNAIN\.npmrc
+6 silly config load:file:C:\Users\MD SAHIL HASNAIN\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm install
+8 verbose argv "install" "--force" "--cache" "D:\\Projects\\kalam-e-raza\\.npx-cache" "--prefer-offline" "false" "--prefer-online" "false" "--offline" "false" "--no-progress" "--no-save" "--no-audit" "--include" "dev" "--include" "peer" "--include" "optional" "--no-package-lock-only" "--no-dry-run"
+9 verbose logfile logs-max:10 dir:D:\Projects\kalam-e-raza\.npx-cache\_logs\2026-07-28T15_53_51_060Z-
+10 verbose logfile D:\Projects\kalam-e-raza\.npx-cache\_logs\2026-07-28T15_53_51_060Z-debug-0.log
+11 warn using --force Recommended protections disabled.
+12 silly logfile done cleaning log files
+13 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+14 silly idealTree buildDeps
+15 silly fetch manifest dotenv@^8.2.0
+16 silly packumentCache full:https://registry.npmjs.org/dotenv cache-miss
+17 http cache https://registry.npmjs.org/dotenv 27ms (cache hit)
+18 silly packumentCache full:https://registry.npmjs.org/dotenv set size:277802 disposed:false
+19 silly fetch manifest node-fetch@^3.3.2
+20 silly packumentCache full:https://registry.npmjs.org/node-fetch cache-miss
+21 http cache https://registry.npmjs.org/node-fetch 12ms (cache hit)
+22 silly packumentCache full:https://registry.npmjs.org/node-fetch set size:896010 disposed:false
+23 silly placeDep ROOT dotenv@8.6.0 OK for: @sahilhasnain/android-ci@0.1.0 want: ^8.2.0
+24 silly placeDep ROOT node-fetch@3.3.2 OK for: @sahilhasnain/android-ci@0.1.0 want: ^3.3.2
+25 silly fetch manifest data-uri-to-buffer@^4.0.0
+26 silly packumentCache full:https://registry.npmjs.org/data-uri-to-buffer cache-miss
+27 silly fetch manifest fetch-blob@^3.1.4
+28 silly packumentCache full:https://registry.npmjs.org/fetch-blob cache-miss
+29 silly fetch manifest formdata-polyfill@^4.0.10
+30 silly packumentCache full:https://registry.npmjs.org/formdata-polyfill cache-miss
+31 http cache https://registry.npmjs.org/data-uri-to-buffer 15ms (cache hit)
+32 silly packumentCache full:https://registry.npmjs.org/data-uri-to-buffer set size:48018 disposed:false
+33 http cache https://registry.npmjs.org/fetch-blob 20ms (cache hit)
+34 silly packumentCache full:https://registry.npmjs.org/fetch-blob set size:73704 disposed:false
+35 http cache https://registry.npmjs.org/formdata-polyfill 22ms (cache hit)
+36 silly packumentCache full:https://registry.npmjs.org/formdata-polyfill set size:94446 disposed:false
+37 silly placeDep ROOT data-uri-to-buffer@4.0.1 OK for: node-fetch@3.3.2 want: ^4.0.0
+38 silly placeDep ROOT fetch-blob@3.2.0 OK for: node-fetch@3.3.2 want: ^3.1.4
+39 silly placeDep ROOT formdata-polyfill@4.0.10 OK for: node-fetch@3.3.2 want: ^4.0.10
+40 silly fetch manifest node-domexception@^1.0.0
+41 silly packumentCache full:https://registry.npmjs.org/node-domexception cache-miss
+42 silly fetch manifest web-streams-polyfill@^3.0.3
+43 silly packumentCache full:https://registry.npmjs.org/web-streams-polyfill cache-miss
+44 http cache https://registry.npmjs.org/node-domexception 11ms (cache hit)
+45 silly packumentCache full:https://registry.npmjs.org/node-domexception set size:11516 disposed:false
+46 http cache https://registry.npmjs.org/web-streams-polyfill 12ms (cache hit)
+47 silly packumentCache full:https://registry.npmjs.org/web-streams-polyfill set size:140806 disposed:false
+48 silly placeDep ROOT node-domexception@1.0.0 OK for: fetch-blob@3.2.0 want: ^1.0.0
+49 silly placeDep ROOT web-streams-polyfill@3.3.3 OK for: fetch-blob@3.2.0 want: ^3.0.3
+50 silly reify moves {}
+51 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\fsevents
+52 silly reify mark deleted [
+52 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\fsevents'
+52 silly reify ]
+53 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\win32-ia32
+54 silly reify mark deleted [
+54 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\win32-ia32'
+54 silly reify ]
+55 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\win32-arm64
+56 silly reify mark deleted [
+56 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\win32-arm64'
+56 silly reify ]
+57 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\sunos-x64
+58 silly reify mark deleted [
+58 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\sunos-x64'
+58 silly reify ]
+59 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\openharmony-arm64
+60 silly reify mark deleted [
+60 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\openharmony-arm64'
+60 silly reify ]
+61 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\openbsd-x64
+62 silly reify mark deleted [
+62 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\openbsd-x64'
+62 silly reify ]
+63 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\openbsd-arm64
+64 silly reify mark deleted [
+64 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\openbsd-arm64'
+64 silly reify ]
+65 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\netbsd-x64
+66 silly reify mark deleted [
+66 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\netbsd-x64'
+66 silly reify ]
+67 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\netbsd-arm64
+68 silly reify mark deleted [
+68 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\netbsd-arm64'
+68 silly reify ]
+69 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-x64
+70 silly reify mark deleted [
+70 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-x64'
+70 silly reify ]
+71 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-s390x
+72 silly reify mark deleted [
+72 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-s390x'
+72 silly reify ]
+73 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-riscv64
+74 silly reify mark deleted [
+74 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-riscv64'
+74 silly reify ]
+75 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-ppc64
+76 silly reify mark deleted [
+76 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-ppc64'
+76 silly reify ]
+77 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-mips64el
+78 silly reify mark deleted [
+78 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-mips64el'
+78 silly reify ]
+79 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-loong64
+80 silly reify mark deleted [
+80 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-loong64'
+80 silly reify ]
+81 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-ia32
+82 silly reify mark deleted [
+82 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-ia32'
+82 silly reify ]
+83 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-arm64
+84 silly reify mark deleted [
+84 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-arm64'
+84 silly reify ]
+85 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\linux-arm
+86 silly reify mark deleted [
+86 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\linux-arm'
+86 silly reify ]
+87 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\freebsd-x64
+88 silly reify mark deleted [
+88 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\freebsd-x64'
+88 silly reify ]
+89 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\freebsd-arm64
+90 silly reify mark deleted [
+90 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\freebsd-arm64'
+90 silly reify ]
+91 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\darwin-x64
+92 silly reify mark deleted [
+92 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\darwin-x64'
+92 silly reify ]
+93 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\darwin-arm64
+94 silly reify mark deleted [
+94 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\darwin-arm64'
+94 silly reify ]
+95 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\android-x64
+96 silly reify mark deleted [
+96 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\android-x64'
+96 silly reify ]
+97 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\android-arm64
+98 silly reify mark deleted [
+98 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\android-arm64'
+98 silly reify ]
+99 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\android-arm
+100 silly reify mark deleted [
+100 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\android-arm'
+100 silly reify ]
+101 verbose reify failed optional dependency D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\node_modules\@esbuild\aix-ppc64
+102 silly reify mark deleted [
+102 silly reify   'D:\\Projects\\kalam-e-raza\\.npx-cache\\_cacache\\tmp\\git-clone0Vf8AO\\node_modules\\@esbuild\\aix-ppc64'
+102 silly reify ]
+103 http cache web-streams-polyfill@https://registry.npmjs.org/web-streams-polyfill/-/web-streams-polyfill-3.3.3.tgz 0ms (cache hit)
+104 http cache node-domexception@https://registry.npmjs.org/node-domexception/-/node-domexception-1.0.0.tgz 1ms (cache hit)
+105 http cache formdata-polyfill@https://registry.npmjs.org/formdata-polyfill/-/formdata-polyfill-4.0.10.tgz 0ms (cache hit)
+106 http cache node-fetch@https://registry.npmjs.org/node-fetch/-/node-fetch-3.3.2.tgz 0ms (cache hit)
+107 http cache fetch-blob@https://registry.npmjs.org/fetch-blob/-/fetch-blob-3.2.0.tgz 0ms (cache hit)
+108 http cache dotenv@https://registry.npmjs.org/dotenv/-/dotenv-8.6.0.tgz 0ms (cache hit)
+109 http cache undici-types@https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz 0ms (cache hit)
+110 http cache data-uri-to-buffer@https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz 0ms (cache hit)
+111 http cache tsx@https://registry.npmjs.org/tsx/-/tsx-4.21.0.tgz 0ms (cache hit)
+112 http cache resolve-pkg-maps@https://registry.npmjs.org/resolve-pkg-maps/-/resolve-pkg-maps-1.0.0.tgz 0ms (cache hit)
+113 http cache typescript@https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz 0ms (cache hit)
+114 http cache kleur@https://registry.npmjs.org/kleur/-/kleur-4.1.5.tgz 0ms (cache hit)
+115 http cache @esbuild/win32-x64@https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.27.4.tgz 0ms (cache hit)
+116 http cache get-tsconfig@https://registry.npmjs.org/get-tsconfig/-/get-tsconfig-4.13.7.tgz 0ms (cache hit)
+117 http cache @types/node@https://registry.npmjs.org/@types/node/-/node-24.12.0.tgz 0ms (cache hit)
+118 http cache esbuild@https://registry.npmjs.org/esbuild/-/esbuild-0.27.4.tgz 0ms (cache hit)
+119 silly tarball no local data for undici-types@https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz. Extracting by manifest.
+120 silly tarball no local data for tsx@https://registry.npmjs.org/tsx/-/tsx-4.21.0.tgz. Extracting by manifest.
+121 silly tarball no local data for resolve-pkg-maps@https://registry.npmjs.org/resolve-pkg-maps/-/resolve-pkg-maps-1.0.0.tgz. Extracting by manifest.
+122 silly tarball no local data for typescript@https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz. Extracting by manifest.
+123 silly tarball no local data for @esbuild/win32-x64@https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.27.4.tgz. Extracting by manifest.
+124 silly tarball no local data for get-tsconfig@https://registry.npmjs.org/get-tsconfig/-/get-tsconfig-4.13.7.tgz. Extracting by manifest.
+125 silly tarball no local data for @types/node@https://registry.npmjs.org/@types/node/-/node-24.12.0.tgz. Extracting by manifest.
+126 silly tarball no local data for esbuild@https://registry.npmjs.org/esbuild/-/esbuild-0.27.4.tgz. Extracting by manifest.
+127 warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+128 http fetch GET 200 https://registry.npmjs.org/resolve-pkg-maps/-/resolve-pkg-maps-1.0.0.tgz 470ms (cache miss)
+129 http fetch GET 200 https://registry.npmjs.org/get-tsconfig/-/get-tsconfig-4.13.7.tgz 531ms (cache miss)
+130 http fetch GET 200 https://registry.npmjs.org/esbuild/-/esbuild-0.27.4.tgz 543ms (cache miss)
+131 http fetch GET 200 https://registry.npmjs.org/undici-types/-/undici-types-7.16.0.tgz 782ms (cache miss)
+132 http fetch GET 200 https://registry.npmjs.org/tsx/-/tsx-4.21.0.tgz 861ms (cache miss)
+133 http fetch GET 200 https://registry.npmjs.org/@types/node/-/node-24.12.0.tgz 1036ms (cache miss)
+134 http fetch GET 200 https://registry.npmjs.org/typescript/-/typescript-5.9.3.tgz 1735ms (cache miss)
+135 http fetch GET 200 https://registry.npmjs.org/@esbuild/win32-x64/-/win32-x64-0.27.4.tgz 2545ms (cache miss)
+136 info run esbuild@0.27.4 postinstall node_modules/esbuild node install.js
+137 info run esbuild@0.27.4 postinstall { code: 0, signal: null }
+138 verbose stack Error: command failed
+138 verbose stack     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:22:22)
+138 verbose stack     at spawnWithShell (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:124:10)
+138 verbose stack     at promiseSpawn (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\promise-spawn\lib\index.js:12:12)
+138 verbose stack     at runScriptPkg (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script-pkg.js:79:13)
+138 verbose stack     at runScript (C:\Program Files\nodejs\node_modules\npm\node_modules\@npmcli\run-script\lib\run-script.js:12:10)
+138 verbose stack     at async Install.exec (C:\Program Files\nodejs\node_modules\npm\lib\commands\install.js:163:9)
+138 verbose stack     at async Npm.exec (C:\Program Files\nodejs\node_modules\npm\lib\npm.js:207:9)
+138 verbose stack     at async module.exports (C:\Program Files\nodejs\node_modules\npm\lib\cli\entry.js:74:5)
+139 verbose pkgid @sahilhasnain/android-ci@0.1.0
+140 error code 2
+141 error path D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO
+142 error command failed
+143 error command C:\WINDOWS\system32\cmd.exe /d /s /c npm run build
+144 verbose cwd D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO
+145 verbose os Windows_NT 10.0.26200
+146 verbose node v22.19.0
+147 verbose npm  v10.9.3
+148 verbose exit 2
+149 verbose code 2
+150 error A complete log of this run can be found in: D:\Projects\kalam-e-raza\.npx-cache\_logs\2026-07-28T15_53_51_060Z-debug-0.log

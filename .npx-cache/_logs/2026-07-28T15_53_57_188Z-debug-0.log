@@ -1,0 +1,19 @@
+0 verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+1 info using npm@10.9.3
+2 info using node@v22.19.0
+3 silly config load:file:C:\Program Files\nodejs\node_modules\npm\npmrc
+4 silly config load:file:D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO\.npmrc
+5 silly config load:file:C:\Users\MD SAHIL HASNAIN\.npmrc
+6 silly config load:file:C:\Users\MD SAHIL HASNAIN\AppData\Roaming\npm\etc\npmrc
+7 verbose title npm run build
+8 verbose argv "run" "build"
+9 verbose logfile logs-max:10 dir:D:\Projects\kalam-e-raza\.npx-cache\_logs\2026-07-28T15_53_57_188Z-
+10 verbose logfile D:\Projects\kalam-e-raza\.npx-cache\_logs\2026-07-28T15_53_57_188Z-debug-0.log
+11 warn using --force Recommended protections disabled.
+12 silly logfile done cleaning log files
+13 verbose cwd D:\Projects\kalam-e-raza\.npx-cache\_cacache\tmp\git-clone0Vf8AO
+14 verbose os Windows_NT 10.0.26200
+15 verbose node v22.19.0
+16 verbose npm  v10.9.3
+17 verbose exit 2
+18 verbose code 2
