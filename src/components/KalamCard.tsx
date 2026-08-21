@@ -1,7 +1,6 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, View } from "react-native";
 import { colors, borderRadius, spacing } from "@/src/constants/theme";
 import { NastaliqText } from "./NastaliqText";
-import { useLang } from "@/src/contexts/LangContext";
 import { useKalamText } from "@/src/hooks/useKalamText";
 import type { Kalam } from "@/src/types";
 
@@ -11,9 +10,7 @@ type Props = {
 };
 
 export function KalamCard({ kalam, onPress }: Props) {
-  const { lang } = useLang();
-  const { title } = useKalamText();
-  const isRtl = lang === "ur" || lang === "hi";
+  const { title, isRtl } = useKalamText();
 
   return (
     <Pressable onPress={onPress}>
@@ -32,7 +29,7 @@ export function KalamCard({ kalam, onPress }: Props) {
         }}
       >
         <NastaliqText
-          isRtl={isRtl}
+          isRtl={isRtl(kalam)}
           style={{
             fontSize: 18,
             color: colors.black,

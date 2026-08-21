@@ -1,6 +1,13 @@
 import { useLang } from "@/src/contexts/LangContext";
 import type { Kalam, Sher } from "@/src/types";
 
+/** Detects Arabic/Urdu script characters across Arabic Unicode blocks. */
+const URDU_SCRIPT = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+
+function containsUrduScript(text: string): boolean {
+  return URDU_SCRIPT.test(text);
+}
+
 export function useKalamText() {
   const { lang } = useLang();
 
@@ -38,5 +45,25 @@ export function useKalamText() {
     }
   }
 
-  return { title, verses, poetName };
+  /**
+   * True when the content that will actually render for this kalam is
+   * Urdu script, regardless of the selected language. Urdu-only naats fall
+   * back to Urdu text even in roman/english mode and must stay RTL.
+   */
+  function isRtl(kalam: Kalam): boolean {
+    const firstLine = verses(kalam)[0]?.m1 ?? "";
+    return containsUrduScript(title(kalam)) || containsUrduScript(firstLine);
+  }
+
+  /**
+   * False when the selected language has no authored text for this kalam,
+   * meaning it would render as raw Urdu script. Used to hide Urdu-only
+   * naats from lists while browsing in roman/english mode.
+   */
+  function availableInLang(kalam: Kalam): boolean {
+    if (lang === "ur" || lang === "hi") return true;
+    return !isRtl(kalam);
+  }
+
+  return { title, verses, poetName, isRtl, availableInLang };
 }

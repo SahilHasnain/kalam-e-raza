@@ -11,11 +11,10 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 export default function FavoritesScreen() {
   const router = useRouter();
   const { lang } = useLang();
-  const { title } = useKalamText();
+  const { title, isRtl, availableInLang } = useKalamText();
   const { favorites } = useFavorites();
 
-  const favoriteKalams = kalams.filter((k) => favorites.has(k.id));
-  const isRtl = lang === "ur" || lang === "hi";
+  const favoriteKalams = kalams.filter((k) => favorites.has(k.id) && availableInLang(k));
 
   return (
     <View style={styles.container}>
@@ -102,7 +101,7 @@ export default function FavoritesScreen() {
               {/* Content */}
               <View style={styles.cardContent}>
                 <NastaliqText
-                  isRtl={isRtl}
+                  isRtl={isRtl(item)}
                   style={styles.kalamTitle}
                   numberOfLines={2}
                 >

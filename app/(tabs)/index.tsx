@@ -3,6 +3,7 @@ import { LangSwitcher } from "@/src/components/LangSwitcher";
 import { borderRadius, colors, spacing } from "@/src/constants/theme";
 import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
+import { useKalamText } from "@/src/hooks/useKalamText";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
@@ -11,21 +12,21 @@ import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 export default function HomeScreen() {
   const router = useRouter();
   const { lang } = useLang();
+  const { availableInLang } = useKalamText();
   const [search, setSearch] = useState("");
 
   const filtered = useMemo(() => {
-    if (!search.trim()) return kalams;
+    const visible = kalams.filter((k) => availableInLang(k));
+    if (!search.trim()) return visible;
     const q = search.toLowerCase();
-    return kalams.filter(
+    return visible.filter(
       (k) =>
         k.titleRo.toLowerCase().includes(q) ||
         k.titleUr.includes(q) ||
         k.versesUr?.some((v) => v.m1.includes(q) || v.m2.includes(q)) ||
         k.versesRo?.some((v) => v.m1.toLowerCase().includes(q) || v.m2.toLowerCase().includes(q)),
     );
-  }, [search]);
-
-  const isRtl = lang === "ur" || lang === "hi";
+  }, [search, availableInLang]);
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.cream }}>

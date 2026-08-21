@@ -9,15 +9,20 @@ import { youtubeMap } from "@/src/data/youtube";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
-import { Modal, Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Modal, Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function KalamDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
   const { lang } = useLang();
-  const { title, verses: getVerses, poetName } = useKalamText();
+  const { title, verses: getVerses, poetName, isRtl } = useKalamText();
   const { isFavorite, toggleFavorite } = useFavorites();
+
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [activePart, setActivePart] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
 
   const kalam = kalams.find((k) => k.id === id);
 
@@ -34,11 +39,8 @@ export default function KalamDetailScreen() {
 
   const favorited = isFavorite(kalam.id);
   const shes = getVerses(kalam);
-  const isRtl = lang === "ur" || lang === "hi";
+  const textIsRtl = isRtl(kalam);
   const videoIds = youtubeMap[kalam.id];
-  const [videoOpen, setVideoOpen] = useState(false);
-  const [activePart, setActivePart] = useState(0);
-  const [playing, setPlaying] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -73,7 +75,7 @@ export default function KalamDetailScreen() {
 
           <View style={styles.titleRow}>
             <View style={styles.titleTextArea}>
-              <Text style={[styles.title, isRtl && { writingDirection: "rtl" }]} numberOfLines={3}>
+              <Text style={[styles.title, textIsRtl && { writingDirection: "rtl" }]} numberOfLines={3}>
                 {title(kalam)}
               </Text>
               {kalam.titleRo && lang !== "ro" && lang !== "en" && (
@@ -100,7 +102,7 @@ export default function KalamDetailScreen() {
         {/* Video Button */}
         {videoIds && videoIds.length > 0 && (
           <Pressable
-            onPress={() => { setActivePart(0); setPlaying(false); setVideoOpen(true); }}
+            onPress={() => { setActivePart(0); setPlaying(false); setVideoReady(false); setVideoOpen(true); }}
             style={styles.videoButton}
           >
             <View style={styles.videoButtonIcon}>
@@ -128,11 +130,11 @@ export default function KalamDetailScreen() {
 
               <View style={styles.verseCard}>
                 <View style={styles.verseContent}>
-                  <Text style={[styles.verseText, isRtl && { writingDirection: "rtl" }]}>
+                  <Text style={[styles.verseText, textIsRtl && { writingDirection: "rtl" }]}>
                     {sher.m1}
                   </Text>
                   {sher.m2 && (
-                    <Text style={[styles.verseText, styles.verseText2, isRtl && { writingDirection: "rtl" }]}>
+                    <Text style={[styles.verseText, styles.verseText2, textIsRtl && { writingDirection: "rtl" }]}>
                       {sher.m2}
                     </Text>
                   )}
@@ -190,7 +192,7 @@ export default function KalamDetailScreen() {
               {videoIds.map((_, vi) => (
                 <Pressable
                   key={vi}
-                  onPress={() => { setActivePart(vi); setPlaying(false); }}
+                  onPress={() => { setActivePart(vi); setPlaying(false); setVideoReady(false); }}
                   style={[styles.partTab, activePart === vi && styles.partTabActive]}
                 >
                   <Text style={[styles.partTabText, activePart === vi && styles.partTabTextActive]}>
@@ -203,20 +205,30 @@ export default function KalamDetailScreen() {
 
           {/* Video Player */}
           <View style={styles.sheetPlayerWrapper}>
-            <YoutubePlayer
-              videoId={videoIds[activePart]}
-              height={210}
-              play={playing}
-              onChangeState={(state: string) => {
-                if (state === "playing") setPlaying(true);
-                else if (state === "paused" || state === "ended") setPlaying(false);
-              }}
-              initialPlayerParams={{
-                controls: true,
-                modestbranding: true,
-                rel: false,
-              }}
-            />
+            {videoOpen && (
+              <YoutubePlayer
+                key={activePart}
+                videoId={videoIds[activePart]}
+                height={210}
+                play={playing}
+                onReady={() => setVideoReady(true)}
+                onError={() => setVideoReady(true)}
+                onChangeState={(state: string) => {
+                  if (state === "playing") setPlaying(true);
+                  else if (state === "paused" || state === "ended") setPlaying(false);
+                }}
+                initialPlayerParams={{
+                  controls: true,
+                  modestbranding: true,
+                  rel: false,
+                }}
+              />
+            )}
+            {videoOpen && !videoReady && (
+              <View style={styles.playerLoading}>
+                <ActivityIndicator size="large" color={colors.gold} />
+              </View>
+            )}
           </View>
 
           {/* Close Button */}
@@ -537,6 +549,12 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.lg,
     borderRadius: borderRadius.lg,
     overflow: "hidden",
+  },
+  playerLoading: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.6)",
   },
   sheetClose: {
     alignItems: "center",
