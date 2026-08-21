@@ -45,6 +45,36 @@ export const t: Translations = {
     ro: "Talash karein...",
     en: "Search kalams...",
   },
+  categories: {
+    ur: "صنف",
+    hi: "श्रेणी",
+    ro: "Sinf",
+    en: "Category",
+  },
+  allCategories: {
+    ur: "سب",
+    hi: "सभी",
+    ro: "Sab",
+    en: "All",
+  },
+  naat: {
+    ur: "نعت",
+    hi: "नअत",
+    ro: "Naat",
+    en: "Naat",
+  },
+  manqabat: {
+    ur: "منقبت",
+    hi: "मनक़बत",
+    ro: "Manqabat",
+    en: "Manqabat",
+  },
+  salaam: {
+    ur: "سلام",
+    hi: "सलाम",
+    ro: "Salaam",
+    en: "Salaam",
+  },
   noKalamsFound: {
     ur: "کوئی کلام نہیں ملا",
     hi: "कोई कलाम नहीं मिला",
@@ -140,5 +170,11 @@ export const t: Translations = {
     hi: "होम",
     ro: "Home",
     en: "Home",
+  },
+  recentlyViewed: {
+    ur: "حال ہی میں دیکھے گئے",
+    hi: "हाल में देखे गए",
+    ro: "Abhi dekhe gaye",
+    en: "Recently viewed",
   },
 };

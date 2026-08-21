@@ -15,7 +15,7 @@ export function SearchBar({
   return (
     <View
       style={{
-        backgroundColor: colors.white,
+        backgroundColor: colors.surface,
         borderRadius: borderRadius.md,
         borderWidth: 1,
         borderColor: colors.gray200,
@@ -30,7 +30,7 @@ export function SearchBar({
         placeholderTextColor={colors.gray400}
         style={{
           fontSize: 16,
-          color: colors.black,
+          color: colors.ivory,
           paddingVertical: spacing.xs,
         }}
         autoCapitalize="none"

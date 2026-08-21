@@ -1,4 +1,4 @@
-import type { Kalam } from "@/src/types";
+import type { Kalam, KalamCategory } from "@/src/types";
 
 import aankhen_ro_ro_ke_sujaane_waale from "@/src/data/merged/aankhen-ro-ro-ke-sujaane-waale";
 import allah_allah_ke_nabi_se from "@/src/data/merged/allah-allah-ke-nabi-se";
@@ -130,7 +130,7 @@ import ya_ilaahi_rahm_farma_mustafa_ke_waaste from "@/src/data/merged/ya-ilaahi-
 import zameen_o_zamaan_tumhaare_liye from "@/src/data/merged/zameen-o-zamaan-tumhaare-liye";
 import zarre_jhar_kar_teri_pezaaron_ke from "@/src/data/merged/zarre-jhar-kar-teri-pezaaron-ke";
 
-export const kalams: Kalam[] = [
+const rawKalams: Kalam[] = [
   aankhen_ro_ro_ke_sujaane_waale,
   allah_allah_ke_nabi_se,
   ambia_ko_bhi_ajal_aani_hai,
@@ -261,3 +261,19 @@ export const kalams: Kalam[] = [
   zameen_o_zamaan_tumhaare_liye,
   zarre_jhar_kar_teri_pezaaron_ke,
 ];
+
+const PLACEHOLDER_CATEGORIES: KalamCategory[] = ["naat", "manqabat", "salaam"];
+
+// Keep placeholder categories stable until the source data includes real values.
+function placeholderCategory(id: string): KalamCategory {
+  let hash = 0;
+  for (let index = 0; index < id.length; index += 1) {
+    hash = (hash * 31 + id.charCodeAt(index)) >>> 0;
+  }
+  return PLACEHOLDER_CATEGORIES[hash % PLACEHOLDER_CATEGORIES.length];
+}
+
+export const kalams = rawKalams.map((kalam) => ({
+  ...kalam,
+  category: kalam.category ?? placeholderCategory(kalam.id),
+}));

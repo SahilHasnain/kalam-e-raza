@@ -10,10 +10,10 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.primary,
+        tabBarActiveTintColor: colors.gold,
         tabBarInactiveTintColor: colors.gray400,
         tabBarStyle: {
-          backgroundColor: colors.white,
+          backgroundColor: colors.surface,
           borderTopWidth: 1,
           borderTopColor: colors.gray200,
           paddingTop: 4,
@@ -32,7 +32,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+            <Ionicons name={focused ? "home" : "home-outline"} size={22} color={focused ? colors.gold : colors.gray400} />
           ),
         }}
       />
@@ -41,7 +41,7 @@ export default function TabLayout() {
         options={{
           title: "Favorites",
           tabBarIcon: ({ focused }) => (
-            <Ionicons name={focused ? "heart" : "heart-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+            <Ionicons name={focused ? "heart" : "heart-outline"} size={22} color={focused ? colors.gold : colors.gray400} />
           ),
         }}
       />
@@ -50,7 +50,7 @@ export default function TabLayout() {
         options={{
           title: "About",
           tabBarIcon: ({ focused }) => (
-            <Ionicons name={focused ? "information-circle" : "information-circle-outline"} size={22} color={focused ? colors.primary : colors.gray400} />
+            <Ionicons name={focused ? "information-circle" : "information-circle-outline"} size={22} color={focused ? colors.gold : colors.gray400} />
           ),
         }}
       />

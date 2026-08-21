@@ -1,5 +1,7 @@
 export type Lang = "ur" | "hi" | "ro" | "en";
 
+export type KalamCategory = "naat" | "manqabat" | "salaam";
+
 /** Mapping from kalam ID to YouTube video ID(s). */
 export type YoutubeMap = Record<string, string[]>;
 
@@ -24,6 +26,7 @@ export type Kalam = {
   poetName: string;
   poetNameRo: string;
   poetNameEn: string;
+  category?: KalamCategory;
   titleUr: string;
   titleRo: string;
   titleHi?: string;

@@ -1,42 +1,64 @@
 import { KalamCard } from "@/src/components/KalamCard";
 import { LangSwitcher } from "@/src/components/LangSwitcher";
 import { borderRadius, colors, spacing } from "@/src/constants/theme";
+import { t } from "@/src/constants/translations";
 import { useLang } from "@/src/contexts/LangContext";
+import { useRecent } from "@/src/contexts/RecentContext";
 import { kalams } from "@/src/data";
 import { useKalamText } from "@/src/hooks/useKalamText";
+import type { KalamCategory } from "@/src/types";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, Text, TextInput, View } from "react-native";
+import { FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
   const { lang } = useLang();
+  const uiLang = lang === "ro" ? "en" : lang;
   const { availableInLang } = useKalamText();
+  const { recent } = useRecent();
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<KalamCategory | "all">("all");
+
+  const availableKalams = useMemo(
+    () => kalams.filter((k) => availableInLang(k)),
+    [availableInLang],
+  );
 
   const filtered = useMemo(() => {
-    const visible = kalams.filter((k) => availableInLang(k));
-    if (!search.trim()) return visible;
+    const categoryKalams = selectedCategory === "all"
+      ? availableKalams
+      : availableKalams.filter((kalam) => kalam.category === selectedCategory);
+    if (!search.trim()) return categoryKalams;
     const q = search.toLowerCase();
-    return visible.filter(
+    return categoryKalams.filter(
       (k) =>
-        k.titleRo.toLowerCase().includes(q) ||
         k.titleUr.includes(q) ||
+        k.titleRo.toLowerCase().includes(q) ||
+        k.titleEn?.toLowerCase().includes(q) ||
         k.versesUr?.some((v) => v.m1.includes(q) || v.m2.includes(q)) ||
-        k.versesRo?.some((v) => v.m1.toLowerCase().includes(q) || v.m2.toLowerCase().includes(q)),
+        k.versesRo?.some((v) => v.m1.toLowerCase().includes(q) || v.m2.toLowerCase().includes(q)) ||
+        k.versesEn?.some((v) => v.m1.toLowerCase().includes(q) || v.m2.toLowerCase().includes(q)),
     );
-  }, [search, availableInLang]);
+  }, [search, availableKalams, selectedCategory]);
+
+  const recentlyViewed = useMemo(
+    () => recent
+      .map((id) => availableKalams.find((kalam) => kalam.id === id))
+      .filter((kalam): kalam is (typeof availableKalams)[number] => Boolean(kalam)),
+    [recent, availableKalams],
+  );
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.cream }}>
       {/* Gradient Header */}
       <LinearGradient
-        colors={["#0D5C3F", "#1A7A55", "#0D5C3F"]}
+        colors={[colors.primaryDark, colors.primary, colors.primaryDark]}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={{
-          paddingTop: spacing["5xl"],
+          paddingTop: spacing["3xl"],
           paddingHorizontal: spacing.xl,
           paddingBottom: spacing.lg,
         }}
@@ -104,7 +126,7 @@ export default function HomeScreen() {
             alignItems: "center",
             backgroundColor: colors.primaryLight,
             borderRadius: borderRadius.md,
-            marginTop: spacing.lg,
+            marginTop: spacing.md,
             paddingHorizontal: spacing.md,
           }}
         >
@@ -112,7 +134,7 @@ export default function HomeScreen() {
           <TextInput
             value={search}
             onChangeText={setSearch}
-            placeholder={lang === "ur" ? "تلاش کریں..." : lang === "hi" ? "खोजें..." : "Search kalams..."}
+            placeholder={t.search[uiLang]}
             placeholderTextColor="rgba(255,255,255,0.5)"
             style={{
               flex: 1,
@@ -129,6 +151,41 @@ export default function HomeScreen() {
             </Pressable>
           )}
         </View>
+
+        {/* Availability line */}
+        {availableKalams.length < kalams.length && (
+          <Text style={{ fontSize: 12, color: colors.goldLight, marginTop: spacing.sm, opacity: 0.9 }}>
+            {`${availableKalams.length} ${t.kalams[uiLang]} · ${t.langName[uiLang]}`}
+          </Text>
+        )}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: spacing.sm, marginTop: spacing.md }}
+        >
+          {(["all", "naat", "manqabat", "salaam"] as const).map((category) => {
+            const isSelected = selectedCategory === category;
+            const label = category === "all" ? t.allCategories[uiLang] : t[category][uiLang];
+            return (
+              <Pressable
+                key={category}
+                onPress={() => setSelectedCategory(category)}
+                style={{
+                  borderRadius: borderRadius.full,
+                  borderWidth: 1,
+                  borderColor: isSelected ? colors.gold : colors.surfaceRaised,
+                  backgroundColor: isSelected ? colors.gold : colors.surfaceRaised,
+                  paddingHorizontal: spacing.md,
+                  paddingVertical: spacing.xs,
+                }}
+              >
+                <Text style={{ color: isSelected ? colors.primaryDark : colors.ivory, fontSize: 12, fontWeight: "700" }}>
+                  {label}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </ScrollView>
       </LinearGradient>
 
       {/* All kalams list */}
@@ -140,11 +197,32 @@ export default function HomeScreen() {
           gap: spacing.md,
           paddingBottom: 100,
         }}
-        ListEmptyComponent={
-          <View style={{ alignItems: "center", marginTop: 60 }}>
-            <Text style={{ fontSize: 16, color: colors.gray500 }}>
-              No kalams found
+        ListHeaderComponent={recentlyViewed.length > 0 && !search.trim() && selectedCategory === "all" ? (
+          <View style={{ marginBottom: spacing.lg }}>
+            <Text style={{ color: colors.ivory, fontSize: 18, fontWeight: "700", marginBottom: spacing.md }}>
+              {t.recentlyViewed[uiLang]}
             </Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.md }}>
+              {recentlyViewed.map((kalam) => (
+                <View key={kalam.id} style={{ width: 280 }}>
+                  <KalamCard kalam={kalam} onPress={() => router.push(`/kalam/${kalam.id}`)} />
+                </View>
+              ))}
+            </ScrollView>
+          </View>
+        ) : null}
+        ListEmptyComponent={
+          <View style={{ alignItems: "center", marginTop: 60, paddingHorizontal: spacing.xl }}>
+            <Text style={{ fontSize: 16, color: colors.gray500, textAlign: "center" }}>
+              {search.trim() ? `No results for "${search.trim()}"` : t.noKalamsFound[uiLang]}
+            </Text>
+            {search.trim() ? (
+              <Pressable onPress={() => setSearch("")} hitSlop={8} style={{ marginTop: spacing.md }}>
+                <Text style={{ fontSize: 14, fontWeight: "600", color: colors.primary }}>
+                  Clear search
+                </Text>
+              </Pressable>
+            ) : null}
           </View>
         }
         renderItem={({ item }) => (

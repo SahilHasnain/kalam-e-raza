@@ -67,7 +67,7 @@ export function LangSwitcher() {
               position: "absolute",
               top: 32,
               right: 0,
-              backgroundColor: colors.white,
+               backgroundColor: colors.surface,
               borderRadius: borderRadius.md,
               borderWidth: 1,
               borderColor: colors.gray200,

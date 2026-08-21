@@ -3,12 +3,14 @@ import { useFavorites } from "@/src/contexts/FavoritesContext";
 import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
 import { useKalamText } from "@/src/hooks/useKalamText";
+import { NastaliqText } from "@/src/components/NastaliqText";
 
 import { youtubeMap } from "@/src/data/youtube";
+import { useRecent } from "@/src/contexts/RecentContext";
 
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 
@@ -23,8 +25,13 @@ export default function KalamDetailScreen() {
   const [activePart, setActivePart] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const { recordRecent } = useRecent();
 
   const kalam = kalams.find((k) => k.id === id);
+
+  useEffect(() => {
+    if (kalam) recordRecent(kalam.id);
+  }, [kalam, recordRecent]);
 
   if (!kalam) {
     return (
@@ -46,7 +53,7 @@ export default function KalamDetailScreen() {
     <View style={styles.container}>
       {/* Gradient Background */}
       <LinearGradient
-        colors={['#0D5C3F', '#083D29', '#1A1A2E']}
+        colors={[colors.primary, colors.primaryDark, colors.black]}
         style={StyleSheet.absoluteFill}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
@@ -75,9 +82,9 @@ export default function KalamDetailScreen() {
 
           <View style={styles.titleRow}>
             <View style={styles.titleTextArea}>
-              <Text style={[styles.title, textIsRtl && { writingDirection: "rtl" }]} numberOfLines={3}>
+              <NastaliqText style={[styles.title, textIsRtl && { writingDirection: "rtl" }]} numberOfLines={3}>
                 {title(kalam)}
-              </Text>
+              </NastaliqText>
               {kalam.titleRo && lang !== "ro" && lang !== "en" && (
                 <Text style={styles.titleRoman}>{kalam.titleRo}</Text>
               )}
@@ -130,13 +137,13 @@ export default function KalamDetailScreen() {
 
               <View style={styles.verseCard}>
                 <View style={styles.verseContent}>
-                  <Text style={[styles.verseText, textIsRtl && { writingDirection: "rtl" }]}>
+                  <NastaliqText style={[styles.verseText, textIsRtl && { writingDirection: "rtl" }]}>
                     {sher.m1}
-                  </Text>
+                  </NastaliqText>
                   {sher.m2 && (
-                    <Text style={[styles.verseText, styles.verseText2, textIsRtl && { writingDirection: "rtl" }]}>
+                    <NastaliqText style={[styles.verseText, styles.verseText2, textIsRtl && { writingDirection: "rtl" }]}>
                       {sher.m2}
-                    </Text>
+                    </NastaliqText>
                   )}
                 </View>
               </View>

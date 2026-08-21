@@ -6,6 +6,7 @@ import { t } from "@/src/constants/translations";
 
 export default function AboutScreen() {
   const { lang } = useLang();
+  const uiLang = lang === "ro" ? "en" : lang;
 
   return (
     <ScrollView
@@ -21,14 +22,14 @@ export default function AboutScreen() {
         }}
       >
         <Text style={{ fontSize: fontSize["2xl"], fontWeight: "700", color: colors.white }}>
-          {t.about[lang]}
+          {t.about[uiLang]}
         </Text>
       </View>
 
       <View style={{ marginHorizontal: spacing.xl, marginTop: -spacing.xl, alignItems: "center" }}>
         <View
           style={{
-            backgroundColor: colors.white,
+            backgroundColor: colors.surface,
             borderRadius: borderRadius.lg,
             padding: spacing.lg,
             borderWidth: 1,
@@ -38,7 +39,7 @@ export default function AboutScreen() {
           }}
         >
           <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.gray500, marginBottom: spacing.sm }}>
-            {t.language[lang]}
+            {t.language[uiLang]}
           </Text>
           <LangSwitcher />
         </View>
@@ -48,7 +49,7 @@ export default function AboutScreen() {
         style={{
           marginHorizontal: spacing.xl,
           marginTop: spacing["2xl"],
-          backgroundColor: colors.white,
+          backgroundColor: colors.surface,
           borderRadius: borderRadius.lg,
           padding: spacing.xl,
           borderWidth: 1,

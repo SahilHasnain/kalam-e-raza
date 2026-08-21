@@ -267,7 +267,7 @@ const styles = StyleSheet.create({
   },
   cardGradient: {
     padding: spacing.lg,
-    backgroundColor: colors.white,
+              backgroundColor: colors.surface,
     position: "relative",
   },
   favoriteBadge: {
@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
   },
   kalamTitle: {
     fontSize: 18,
-    color: colors.black,
+    color: colors.ivory,
     lineHeight: 30,
     fontWeight: "600",
     marginBottom: spacing.xs,
