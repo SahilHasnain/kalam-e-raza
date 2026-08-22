@@ -177,4 +177,34 @@ export const t: Translations = {
     ro: "Abhi dekhe gaye",
     en: "Recently viewed",
   },
+  reportCategory: {
+    ur: "صنف کی اصلاح کی اطلاع دیں",
+    hi: "श्रेणी में सुधार की सूचना दें",
+    ro: "Report category",
+    en: "Report category",
+  },
+  chooseCategory: {
+    ur: "درست صنف منتخب کریں",
+    hi: "सही श्रेणी चुनें",
+    ro: "Choose the correct category",
+    en: "Choose the correct category",
+  },
+  reportNotePlaceholder: {
+    ur: "اختیاری نوٹ",
+    hi: "वैकल्पिक नोट",
+    ro: "Optional note",
+    en: "Optional note",
+  },
+  submitReport: {
+    ur: "اطلاع بھیجیں",
+    hi: "रिपोर्ट भेजें",
+    ro: "Submit report",
+    en: "Submit report",
+  },
+  reportThanks: {
+    ur: "شکریہ، آپ کی اطلاع محفوظ ہو گئی ہے۔",
+    hi: "धन्यवाद, आपकी रिपोर्ट सहेज ली गई है।",
+    ro: "Thank you, your report has been saved.",
+    en: "Thank you, your report has been saved.",
+  },
 };

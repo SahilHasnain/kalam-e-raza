@@ -99,8 +99,8 @@ export function LangSwitcher() {
                       lang === l.key
                         ? colors.primary
                         : i % 2 === 0
-                          ? colors.white
-                          : colors.gray50,
+                          ? colors.surface
+                          : colors.surfaceRaised,
                     borderBottomWidth: i < LANGS.length - 1 ? 1 : 0,
                     borderBottomColor: colors.gray100,
                   }}
@@ -108,7 +108,7 @@ export function LangSwitcher() {
                   <Text
                     style={{
                       fontSize: 13,
-                      color: lang === l.key ? colors.white : colors.gray800,
+                      color: lang === l.key ? colors.ivory : colors.ivory,
                       fontWeight: lang === l.key ? "600" : "400",
                     }}
                   >

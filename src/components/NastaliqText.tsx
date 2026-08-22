@@ -14,10 +14,15 @@ export function NastaliqText({ style, children, isRtl, ...props }: Props) {
   return (
     <Text
       style={[
-        isRtl && { writingDirection: "rtl" },
-        isUrdu && { fontFamily: FONT_NASTALIQ },
-        isHindi && { fontFamily: FONT_DEVANAGARI },
         style,
+        isRtl && { writingDirection: "rtl" },
+        isUrdu && {
+          fontFamily: FONT_NASTALIQ,
+          lineHeight: 40,
+          paddingTop: 4,
+          includeFontPadding: true,
+        },
+        isHindi && { fontFamily: FONT_DEVANAGARI },
       ]}
       {...props}
     >

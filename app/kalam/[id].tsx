@@ -4,6 +4,9 @@ import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
 import { useKalamText } from "@/src/hooks/useKalamText";
 import { NastaliqText } from "@/src/components/NastaliqText";
+import { t } from "@/src/constants/translations";
+import { queueCategoryReport } from "@/src/services/categoryReports";
+import type { KalamCategory } from "@/src/types";
 
 import { youtubeMap } from "@/src/data/youtube";
 import { useRecent } from "@/src/contexts/RecentContext";
@@ -11,7 +14,7 @@ import { useRecent } from "@/src/contexts/RecentContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { ActivityIndicator, Modal, Pressable, ScrollView, Share, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, Modal, Pressable, ScrollView, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 
 export default function KalamDetailScreen() {
@@ -25,6 +28,10 @@ export default function KalamDetailScreen() {
   const [activePart, setActivePart] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [videoReady, setVideoReady] = useState(false);
+  const [reportOpen, setReportOpen] = useState(false);
+  const [reportCategory, setReportCategory] = useState<KalamCategory | null>(null);
+  const [reportNote, setReportNote] = useState("");
+  const [reportSent, setReportSent] = useState(false);
   const { recordRecent } = useRecent();
 
   const kalam = kalams.find((k) => k.id === id);
@@ -48,6 +55,8 @@ export default function KalamDetailScreen() {
   const shes = getVerses(kalam);
   const textIsRtl = isRtl(kalam);
   const videoIds = youtubeMap[kalam.id];
+  const uiLang = lang === "ro" ? "en" : lang;
+  const categories: KalamCategory[] = ["naat", "manqabat", "salaam"];
 
   return (
     <View style={styles.container}>
@@ -105,6 +114,17 @@ export default function KalamDetailScreen() {
             <View style={styles.ornamentLine} />
           </View>
         </View>
+
+        <Pressable
+          onPress={() => {
+            setReportCategory(kalam.category ?? "naat");
+            setReportSent(false);
+            setReportOpen(true);
+          }}
+          style={styles.reportButton}
+        >
+          <Text style={styles.reportButtonText}>{t.reportCategory[uiLang]}</Text>
+        </Pressable>
 
         {/* Video Button */}
         {videoIds && videoIds.length > 0 && (
@@ -178,6 +198,76 @@ export default function KalamDetailScreen() {
 
         <View style={styles.bottomSpacer} />
       </ScrollView>
+
+      <Modal
+        visible={reportOpen}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setReportOpen(false)}
+      >
+        <View style={styles.reportBackdrop}>
+          <View style={styles.reportModal}>
+            {reportSent ? (
+              <>
+                <Text style={styles.reportThanks}>{t.reportThanks[uiLang]}</Text>
+                <Pressable onPress={() => setReportOpen(false)} style={styles.reportCloseButton}>
+                  <Text style={styles.reportCloseText}>OK</Text>
+                </Pressable>
+              </>
+            ) : (
+              <>
+                <Text style={styles.reportTitle}>{t.reportCategory[uiLang]}</Text>
+                <Text style={styles.reportPrompt}>{t.chooseCategory[uiLang]}</Text>
+                <View style={styles.reportOptions}>
+                  {categories.map((category) => (
+                    <Pressable
+                      key={category}
+                      onPress={() => setReportCategory(category)}
+                      style={[styles.reportOption, reportCategory === category && styles.reportOptionSelected]}
+                    >
+                      <Text style={[styles.reportOptionText, reportCategory === category && styles.reportOptionTextSelected]}>
+                        {t[category][uiLang]}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
+                <TextInput
+                  value={reportNote}
+                  onChangeText={setReportNote}
+                  placeholder={t.reportNotePlaceholder[uiLang]}
+                  placeholderTextColor={colors.mist}
+                  style={styles.reportInput}
+                  multiline
+                  maxLength={300}
+                />
+                <View style={styles.reportActions}>
+                  <Pressable onPress={() => setReportOpen(false)} style={styles.reportCancelButton}>
+                    <Text style={styles.reportCancelText}>Cancel</Text>
+                  </Pressable>
+                  <Pressable
+                    disabled={!reportCategory}
+                    onPress={async () => {
+                      if (!reportCategory || !kalam.category) return;
+                      await queueCategoryReport({
+                        kalamId: kalam.id,
+                        currentCategory: kalam.category,
+                        suggestedCategory: reportCategory,
+                        note: reportNote.trim(),
+                        createdAt: new Date().toISOString(),
+                      });
+                      setReportSent(true);
+                      setReportNote("");
+                    }}
+                    style={[styles.reportSubmitButton, !reportCategory && styles.reportSubmitDisabled]}
+                  >
+                    <Text style={styles.reportSubmitText}>{t.submitReport[uiLang]}</Text>
+                  </Pressable>
+                </View>
+              </>
+            )}
+          </View>
+        </View>
+      </Modal>
 
       {/* Video Bottom Sheet */}
       <Modal
@@ -459,6 +549,126 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: colors.primaryDark,
     letterSpacing: 0.5,
+  },
+  reportButton: {
+    alignSelf: "center",
+    marginTop: spacing.md,
+    marginBottom: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.full,
+    borderWidth: 1,
+    borderColor: "rgba(201, 168, 76, 0.35)",
+  },
+  reportButtonText: {
+    color: colors.goldLight,
+    fontSize: 12,
+    fontWeight: "600",
+  },
+  reportBackdrop: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: spacing.lg,
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
+  },
+  reportModal: {
+    width: "100%",
+    maxWidth: 420,
+    padding: spacing.lg,
+    borderRadius: borderRadius.lg,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.surfaceRaised,
+  },
+  reportTitle: {
+    color: colors.ivory,
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  reportPrompt: {
+    color: colors.mist,
+    fontSize: 13,
+    marginTop: spacing.xs,
+    marginBottom: spacing.md,
+  },
+  reportOptions: {
+    gap: spacing.sm,
+  },
+  reportOption: {
+    padding: spacing.md,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.surfaceRaised,
+    borderWidth: 1,
+    borderColor: colors.surfaceRaised,
+  },
+  reportOptionSelected: {
+    backgroundColor: colors.primary,
+    borderColor: colors.gold,
+  },
+  reportOptionText: {
+    color: colors.ivory,
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  reportOptionTextSelected: {
+    color: colors.goldLight,
+  },
+  reportInput: {
+    minHeight: 72,
+    marginTop: spacing.md,
+    padding: spacing.md,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.ink,
+    color: colors.ivory,
+    textAlignVertical: "top",
+    borderWidth: 1,
+    borderColor: colors.surfaceRaised,
+  },
+  reportActions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: spacing.sm,
+    marginTop: spacing.lg,
+  },
+  reportCancelButton: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+  },
+  reportCancelText: {
+    color: colors.mist,
+    fontWeight: "600",
+  },
+  reportSubmitButton: {
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.gold,
+  },
+  reportSubmitDisabled: {
+    opacity: 0.5,
+  },
+  reportSubmitText: {
+    color: colors.primaryDark,
+    fontWeight: "700",
+  },
+  reportThanks: {
+    color: colors.ivory,
+    fontSize: 16,
+    lineHeight: 26,
+    textAlign: "center",
+  },
+  reportCloseButton: {
+    alignSelf: "center",
+    marginTop: spacing.lg,
+    paddingHorizontal: spacing.xl,
+    paddingVertical: spacing.sm,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.gold,
+  },
+  reportCloseText: {
+    color: colors.primaryDark,
+    fontWeight: "700",
   },
   videoButton: {
     flexDirection: "row",

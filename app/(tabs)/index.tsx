@@ -1,5 +1,6 @@
 import { KalamCard } from "@/src/components/KalamCard";
 import { LangSwitcher } from "@/src/components/LangSwitcher";
+import { NastaliqText } from "@/src/components/NastaliqText";
 import { borderRadius, colors, spacing } from "@/src/constants/theme";
 import { t } from "@/src/constants/translations";
 import { useLang } from "@/src/contexts/LangContext";
@@ -10,7 +11,7 @@ import type { KalamCategory } from "@/src/types";
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
-import { FlatList, Pressable, ScrollView, Text, TextInput, View } from "react-native";
+import { FlatList, Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
 export default function HomeScreen() {
   const router = useRouter();
@@ -98,19 +99,11 @@ export default function HomeScreen() {
           }}
         >
           <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
-            <View
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 10,
-                backgroundColor: colors.gold,
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontSize: 18, color: colors.primaryDark, fontWeight: "800" }}>
-                ک
-              </Text>
+            <View style={{ width: 36, height: 36, borderRadius: 10, overflow: "hidden" }}>
+              <Image
+                source={require("../../assets/images/icon.png")}
+                style={{ width: 37, height: 37, position: "absolute", left: -0.5, top: -0.5 }}
+              />
             </View>
             <Text style={{ fontSize: 16, fontWeight: "700", color: colors.gold }}>
               Kalam-e-Raza
@@ -135,12 +128,13 @@ export default function HomeScreen() {
             value={search}
             onChangeText={setSearch}
             placeholder={t.search[uiLang]}
-            placeholderTextColor="rgba(255,255,255,0.5)"
+            placeholderTextColor={colors.mist}
             style={{
               flex: 1,
+              minHeight: 40,
               fontSize: 14,
               color: colors.white,
-              paddingVertical: spacing.sm,
+              paddingVertical: 0,
             }}
             autoCapitalize="none"
             autoCorrect={false}
@@ -199,13 +193,16 @@ export default function HomeScreen() {
         }}
         ListHeaderComponent={recentlyViewed.length > 0 && !search.trim() && selectedCategory === "all" ? (
           <View style={{ marginBottom: spacing.lg }}>
-            <Text style={{ color: colors.ivory, fontSize: 18, fontWeight: "700", marginBottom: spacing.md }}>
+            <NastaliqText
+              isRtl={lang === "ur"}
+              style={{ color: colors.ivory, fontSize: 18, fontWeight: "700", marginBottom: spacing.md }}
+            >
               {t.recentlyViewed[uiLang]}
-            </Text>
+            </NastaliqText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.md }}>
               {recentlyViewed.map((kalam) => (
-                <View key={kalam.id} style={{ width: 280 }}>
-                  <KalamCard kalam={kalam} onPress={() => router.push(`/kalam/${kalam.id}`)} />
+                <View key={kalam.id} style={{ width: 220 }}>
+                  <KalamCard compact kalam={kalam} onPress={() => router.push(`/kalam/${kalam.id}`)} />
                 </View>
               ))}
             </ScrollView>

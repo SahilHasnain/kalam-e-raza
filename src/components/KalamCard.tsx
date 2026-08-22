@@ -10,9 +10,10 @@ import type { Kalam } from "@/src/types";
 type Props = {
   kalam: Kalam;
   onPress?: () => void;
+  compact?: boolean;
 };
 
-export function KalamCard({ kalam, onPress }: Props) {
+export function KalamCard({ kalam, onPress, compact = false }: Props) {
   const { title, verses, isRtl } = useKalamText();
   const { isFavorite, toggleFavorite } = useFavorites();
   const { lang } = useLang();
@@ -22,7 +23,7 @@ export function KalamCard({ kalam, onPress }: Props) {
 
   return (
     <Pressable onPress={onPress}>
-      <View style={styles.card}>
+      <View style={[styles.card, compact && styles.compactCard]}>
         <Pressable onPress={() => toggleFavorite(kalam.id)} hitSlop={12} style={styles.heart}>
           <Text style={[styles.heartIcon, favorited && styles.heartIconActive]}>
             {favorited ? "♥" : "♡"}
@@ -37,13 +38,13 @@ export function KalamCard({ kalam, onPress }: Props) {
 
         <NastaliqText
           isRtl={isRtl(kalam)}
-          style={styles.title}
-          numberOfLines={2}
+          style={[styles.title, compact && styles.compactTitle]}
+          numberOfLines={compact ? 1 : 2}
         >
           {title(kalam)}
         </NastaliqText>
 
-        <View style={styles.footer}>
+        <View style={[styles.footer, compact && styles.compactFooter]}>
           <Text style={styles.count}>{verses(kalam).length} verses</Text>
         </View>
       </View>
@@ -53,7 +54,7 @@ export function KalamCard({ kalam, onPress }: Props) {
 
 const styles = StyleSheet.create({
   card: {
-          backgroundColor: colors.surface,
+    backgroundColor: colors.surface,
     borderRadius: borderRadius.lg,
     padding: spacing.lg,
     borderWidth: 1,
@@ -63,6 +64,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 8,
     elevation: 3,
+  },
+  compactCard: {
+    padding: spacing.md,
   },
   heart: {
     position: "absolute",
@@ -89,11 +93,19 @@ const styles = StyleSheet.create({
     paddingRight: spacing["3xl"],
     marginTop: spacing.sm,
   },
+  compactTitle: {
+    fontSize: 15,
+    lineHeight: 24,
+    paddingRight: spacing.xl,
+  },
   footer: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
     marginTop: spacing.sm,
+  },
+  compactFooter: {
+    marginTop: spacing.xs,
   },
   count: {
     fontSize: 11,

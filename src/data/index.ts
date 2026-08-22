@@ -262,18 +262,52 @@ const rawKalams: Kalam[] = [
   zarre_jhar_kar_teri_pezaaron_ke,
 ];
 
-const PLACEHOLDER_CATEGORIES: KalamCategory[] = ["naat", "manqabat", "salaam"];
-
-// Keep placeholder categories stable until the source data includes real values.
-function placeholderCategory(id: string): KalamCategory {
-  let hash = 0;
-  for (let index = 0; index < id.length; index += 1) {
-    hash = (hash * 31 + id.charCodeAt(index)) >>> 0;
-  }
-  return PLACEHOLDER_CATEGORIES[hash % PLACEHOLDER_CATEGORIES.length];
-}
+const categoryByKalamId: Record<string, KalamCategory> = Object.fromEntries([
+  ...[
+    "aankhen-ro-ro-ke-sujaane-waale", "allah-allah-ke-nabi-se", "ambia-ko-bhi-ajal-aani-hai",
+    "andheri-raat-hai-gham-ki-ghata", "arsh-e-haq-hai-masnad-e-rifat-rasoolullah-ki",
+    "arsh-ki-aql-dang-hai-charkh-me-aasmaan-hai", "bheeni-suhaani-subh",
+    "chamak-tujh-se-paate-hain-sab-paane-waale", "dil-ko-un-se-khuda-juda-na-kare",
+    "dushman-e-ahmad-pe-shiddat-kijiye", "farsh-waale-teri-shaukat",
+    "gunahgaaron-ko-haatif-se-naweed-e-khush-ma-aali-hai", "hirz-e-jaan-zikr-e-shafaat-kijiye",
+    "imaan-e-qaal-e-mustafa-ee", "kaabe-ke-badrud-duja", "kalam-1", "kalam-2", "kalam-3",
+    "kalam-4", "kalam-5", "kalam-7", "kalam-8", "kalam-9", "kalam-10", "kalam-11",
+    "kalam-12", "kalam-13", "kalam-14", "kalam-15", "kalam-16", "kalam-17", "kalam-18",
+    "kalam-19", "kalam-20", "kalam-21", "kalam-22", "kalam-23", "kalam-24", "kalam-25",
+    "kalam-26", "kalam-27", "kalam-28", "kalam-29", "kalam-30", "kalam-32", "kalam-33",
+    "kalam-34", "kalam-36", "kalam-37", "kalam-71", "kalam-73", "kalam-74", "kalam-76",
+    "kalam-77", "kalam-78", "kalam-92", "kalam-93", "kalam-95", "kalam-102", "kalam-103",
+    "kalam-105", "kalam-107", "kalam-115", "kalam-125", "kalam-133", "kalam-224",
+    "kalam-226", "kalam-245", "kalam-247", "kalam-250", "kis-ke-jalwe-ki-jhalak-hai",
+    "kya-mahakte-hain-mahakne-waale", "milk-e-khaas-e-kibriya",
+    "momin-wo-hai-jo-un-ki-izzat-pe-mare-dil-se", "mustafa-khayr-ul-wara-ho",
+    "muzhdah-baad-ay-aasiyo-shafee-shah-e-abraar-hai", "na-arsh-e-aiman",
+    "nabi-sarwar-e-har-rasool-o-wali-hai", "nazar-ek-chaman-se-do-chaar-hai",
+    "pesh-e-haq-muzhda-shafaat-ka-sunaate-jaa-enge", "qaafile-ne-soo-e-taiba-kamar-aaraa-ee-ki",
+    "raah-pur-khaar-hai-kya-hona-hai", "ronaak-e-bazm-e-jahaan-hai-aashiqaan-e-sokhta",
+    "rubaiyaat-poetic-quatrains", "sab-se-awla-o-aala-hamaara-nabi",
+    "sarwar-kahun-ke-malik-o-maula-kahun-tujhe", "shukr-e-khuda-ke-aaj-ghari-us-safar-ki-hai",
+    "soona-jangal-raat-andheri", "subh-taiba-me-huwi-batta-hai-baara-noor-ka",
+    "sunte-hain-ke-mahshar-me", "tu-ne-islam-diya", "utha-do-parda-dikha-do-chehra",
+    "waah-kya-jood-o-karam", "wo-sarwar-e-kishwar-e-risaalat",
+    "wohi-rabb-hai-jis-ne-tujh-ko-hama-tan-karam-banaaya", "ya-ilaahi-rahm-farma-mustafa-ke-waaste",
+    "zameen-o-zamaan-tumhaare-liye", "zarre-jhar-kar-teri-pezaaron-ke",
+  ].map((id) => [id, "naat"]),
+  ...[
+    "arz-e-ahwaal", "badal-ya-fard-jo-kaamil-hai-ya-ghaus", "jo-tera-tifl-hai-kaamil-hai-ya-ghaus",
+    "kalam-6", "kalam-64", "kalam-65", "kalam-66", "kalam-116", "kalam-117", "kalam-118",
+    "kalam-119", "kalam-120", "kalam-121", "kalam-122", "kalam-123", "kalam-126", "kalam-134",
+    "kalam-135", "kalam-241", "kalam-242", "kalam-246", "kalam-251",
+    "talab-ka-munh-to-kis-qaabil-hai-ya-ghaus", "tera-zarrah-mah-e-kaamil-hai-ya-ghaus",
+    "waah-kya-martaba-ay-ghaus",
+  ].map((id) => [id, "manqabat"]),
+  ...[
+    "kalam-31", "kalam-35", "kalam-100", "kalam-127", "lahad-me-ishq-e-rukh-e-shah-ka-daagh-le-ke-chale",
+    "sar-soo-e-rauza-jhuka-phir-tujh-ko-kya",
+  ].map((id) => [id, "salaam"]),
+]) as Record<string, KalamCategory>;
 
 export const kalams = rawKalams.map((kalam) => ({
   ...kalam,
-  category: kalam.category ?? placeholderCategory(kalam.id),
+  category: kalam.category ?? categoryByKalamId[kalam.id],
 }));

@@ -25,14 +25,16 @@ export function RecentProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
-  const recordRecent = useCallback(
-    (id: string) => {
-      const updated = [id, ...recent.filter((r) => r !== id)].slice(0, MAX_RECENT);
-      setRecent(updated);
+  const recordRecent = useCallback((id: string) => {
+    setRecent((current) => {
+      const updated = [id, ...current.filter((recentId) => recentId !== id)].slice(0, MAX_RECENT);
+      if (updated.length === current.length && updated.every((recentId, index) => recentId === current[index])) {
+        return current;
+      }
       void AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-    },
-    [recent],
-  );
+      return updated;
+    });
+  }, []);
 
   return (
     <RecentContext.Provider value={{ recent, recordRecent }}>
