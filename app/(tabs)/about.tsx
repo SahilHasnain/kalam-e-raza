@@ -6,7 +6,6 @@ import { t } from "@/src/constants/translations";
 
 export default function AboutScreen() {
   const { lang } = useLang();
-  const uiLang = lang === "ro" ? "en" : lang;
 
   return (
     <ScrollView
@@ -22,7 +21,7 @@ export default function AboutScreen() {
         }}
       >
         <Text style={{ fontSize: fontSize["2xl"], fontWeight: "700", color: colors.white }}>
-          {t.about[uiLang]}
+          About
         </Text>
       </View>
 
@@ -39,7 +38,7 @@ export default function AboutScreen() {
           }}
         >
           <Text style={{ fontSize: fontSize.sm, fontWeight: "600", color: colors.gray500, marginBottom: spacing.sm }}>
-            {t.language[uiLang]}
+            Language
           </Text>
           <LangSwitcher />
         </View>

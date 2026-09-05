@@ -1,7 +1,5 @@
 import { NastaliqText } from "@/src/components/NastaliqText";
 import { borderRadius, colors, spacing } from "@/src/constants/theme";
-import { t } from "@/src/constants/translations";
-import { useLang } from "@/src/contexts/LangContext";
 import { getBlocksBySectionNo, getSectionInfo } from "@/src/db/database";
 import type { BlockRow, SectionInfo } from "@/src/db/types";
 import { useSQLiteContext } from "expo-sqlite";
@@ -30,8 +28,6 @@ export default function SharahReaderScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams<{ id: string }>();
   const sectionNo = Number(id);
-  const { lang } = useLang();
-  const uiLang = lang === "ro" ? "en" : lang;
 
   const [info, setInfo] = useState<SectionInfo | null>(null);
   const [blocks, setBlocks] = useState<BlockRow[]>([]);
@@ -60,7 +56,7 @@ export default function SharahReaderScreen() {
       <View style={styles.notFoundContainer}>
         <Text style={styles.notFoundText}>Sharah not found</Text>
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.notFoundButton}>{t.goBack[uiLang]}</Text>
+          <Text style={styles.notFoundButton}>Go Back</Text>
         </Pressable>
       </View>
     );
@@ -88,9 +84,9 @@ export default function SharahReaderScreen() {
           <Text style={styles.backText}>‹</Text>
         </Pressable>
         <View style={styles.topBarCenter}>
-          <Text style={styles.topBarTitle}>{t.sharahHeader[uiLang]}</Text>
+          <Text style={styles.topBarTitle}>Sharahe Kalam-e-Raza</Text>
           <View style={styles.sectionChip}>
-            <Text style={styles.sectionChipText}>{t.naat[uiLang]} {sectionNo}</Text>
+            <Text style={styles.sectionChipText}>Naat {sectionNo}</Text>
           </View>
         </View>
         <View style={styles.backButton} />
@@ -136,9 +132,6 @@ export default function SharahReaderScreen() {
 }
 
 function GroupRenderer({ group }: { group: RenderedBlock }) {
-  const { lang } = useLang();
-  const uiLang = lang === "ro" ? "en" : lang;
-
   if (group.kind === "verse") {
     return (
       <View style={styles.verseCard}>
@@ -159,7 +152,7 @@ function GroupRenderer({ group }: { group: RenderedBlock }) {
       <View style={styles.glossaryCard}>
         <View style={styles.glossaryHeader}>
           <View style={styles.glossaryDot} />
-          <Text style={styles.glossaryTitle}>{t.mushkilAlfaz[uiLang]}</Text>
+          <Text style={styles.glossaryTitle}>Difficult words</Text>
           <View style={styles.glossaryDot} />
         </View>
         {group.items.length > 0 && (
@@ -180,7 +173,7 @@ function GroupRenderer({ group }: { group: RenderedBlock }) {
   return (
     <View style={styles.explanationCard}>
       <View style={styles.explanationHeader}>
-        <Text style={styles.explanationLabel}>{t.mafhoom[uiLang]}</Text>
+        <Text style={styles.explanationLabel}>Meaning</Text>
       </View>
       <Text style={styles.explanationText}>{group.body}</Text>
     </View>

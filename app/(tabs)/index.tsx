@@ -13,6 +13,13 @@ import { useRouter } from "expo-router";
 import { useMemo, useState } from "react";
 import { FlatList, Image, Pressable, ScrollView, Text, TextInput, View } from "react-native";
 
+const CATEGORY_LABELS: Record<KalamCategory | "all", string> = {
+  all: "All",
+  naat: "Naat",
+  manqabat: "Manqabat",
+  salaam: "Salaam",
+};
+
 export default function HomeScreen() {
   const router = useRouter();
   const { lang } = useLang();
@@ -127,7 +134,7 @@ export default function HomeScreen() {
           <TextInput
             value={search}
             onChangeText={setSearch}
-            placeholder={t.search[uiLang]}
+            placeholder="Search kalams..."
             placeholderTextColor={colors.mist}
             style={{
               flex: 1,
@@ -149,7 +156,7 @@ export default function HomeScreen() {
         {/* Availability line */}
         {availableKalams.length < kalams.length && (
           <Text style={{ fontSize: 12, color: colors.goldLight, marginTop: spacing.sm, opacity: 0.9 }}>
-            {`${availableKalams.length} ${t.kalams[uiLang]} · ${t.langName[uiLang]}`}
+            {`${availableKalams.length} Kalams · ${t.langName[uiLang]}`}
           </Text>
         )}
         <ScrollView
@@ -159,7 +166,7 @@ export default function HomeScreen() {
         >
           {(["all", "naat", "manqabat", "salaam"] as const).map((category) => {
             const isSelected = selectedCategory === category;
-            const label = category === "all" ? t.allCategories[uiLang] : t[category][uiLang];
+            const label = CATEGORY_LABELS[category];
             return (
               <Pressable
                 key={category}
@@ -197,7 +204,7 @@ export default function HomeScreen() {
               isRtl={lang === "ur"}
               style={{ color: colors.ivory, fontSize: 18, fontWeight: "700", marginBottom: spacing.md }}
             >
-              {t.recentlyViewed[uiLang]}
+              Recently viewed
             </NastaliqText>
             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.md }}>
               {recentlyViewed.map((kalam) => (
@@ -211,7 +218,7 @@ export default function HomeScreen() {
         ListEmptyComponent={
           <View style={{ alignItems: "center", marginTop: 60, paddingHorizontal: spacing.xl }}>
             <Text style={{ fontSize: 16, color: colors.gray500, textAlign: "center" }}>
-              {search.trim() ? `No results for "${search.trim()}"` : t.noKalamsFound[uiLang]}
+              {search.trim() ? `No results for "${search.trim()}"` : "No kalams found"}
             </Text>
             {search.trim() ? (
               <Pressable onPress={() => setSearch("")} hitSlop={8} style={{ marginTop: spacing.md }}>

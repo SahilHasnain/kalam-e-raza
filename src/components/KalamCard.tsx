@@ -1,11 +1,15 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, borderRadius, spacing } from "@/src/constants/theme";
-import { t } from "@/src/constants/translations";
 import { NastaliqText } from "./NastaliqText";
 import { useFavorites } from "@/src/contexts/FavoritesContext";
-import { useLang } from "@/src/contexts/LangContext";
 import { useKalamText } from "@/src/hooks/useKalamText";
-import type { Kalam } from "@/src/types";
+import type { Kalam, KalamCategory } from "@/src/types";
+
+const CATEGORY_LABELS: Record<KalamCategory, string> = {
+  naat: "Naat",
+  manqabat: "Manqabat",
+  salaam: "Salaam",
+};
 
 type Props = {
   kalam: Kalam;
@@ -16,8 +20,6 @@ type Props = {
 export function KalamCard({ kalam, onPress, compact = false }: Props) {
   const { title, verses, isRtl } = useKalamText();
   const { isFavorite, toggleFavorite } = useFavorites();
-  const { lang } = useLang();
-  const uiLang = lang === "ro" ? "en" : lang;
 
   const favorited = isFavorite(kalam.id);
 
@@ -32,7 +34,7 @@ export function KalamCard({ kalam, onPress, compact = false }: Props) {
 
         {kalam.category && (
           <View style={styles.categoryPill}>
-            <Text style={styles.categoryText}>{t[kalam.category][uiLang]}</Text>
+            <Text style={styles.categoryText}>{CATEGORY_LABELS[kalam.category]}</Text>
           </View>
         )}
 

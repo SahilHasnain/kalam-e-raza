@@ -2,9 +2,9 @@ import { borderRadius, colors, spacing } from "@/src/constants/theme";
 import { useFavorites } from "@/src/contexts/FavoritesContext";
 import { useLang } from "@/src/contexts/LangContext";
 import { kalams } from "@/src/data";
+import { getSharahSectionId } from "@/src/data/sharaheKalam";
 import { useKalamText } from "@/src/hooks/useKalamText";
 import { NastaliqText } from "@/src/components/NastaliqText";
-import { t } from "@/src/constants/translations";
 import { queueCategoryReport } from "@/src/services/categoryReports";
 import type { KalamCategory } from "@/src/types";
 
@@ -16,6 +16,12 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, Share, StyleSheet, Text, TextInput, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
+
+const CATEGORY_LABELS: Record<KalamCategory, string> = {
+  naat: "Naat",
+  manqabat: "Manqabat",
+  salaam: "Salaam",
+};
 
 export default function KalamDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -55,7 +61,7 @@ export default function KalamDetailScreen() {
   const shes = getVerses(kalam);
   const textIsRtl = isRtl(kalam);
   const videoIds = youtubeMap[kalam.id];
-  const uiLang = lang === "ro" ? "en" : lang;
+  const sharahSectionId = getSharahSectionId(kalam.id);
   const categories: KalamCategory[] = ["naat", "manqabat", "salaam"];
 
   return (
@@ -123,25 +129,41 @@ export default function KalamDetailScreen() {
           }}
           style={styles.reportButton}
         >
-          <Text style={styles.reportButtonText}>{t.reportCategory[uiLang]}</Text>
+          <Text style={styles.reportButtonText}>Report category</Text>
         </Pressable>
 
-        {/* Video Button */}
-        {videoIds && videoIds.length > 0 && (
-          <Pressable
-            onPress={() => { setActivePart(0); setPlaying(false); setVideoReady(false); setVideoOpen(true); }}
-            style={styles.videoButton}
-          >
-            <View style={styles.videoButtonIcon}>
-              <Text style={styles.videoButtonPlay}>▶</Text>
-            </View>
-            <View style={styles.videoButtonText}>
-              <Text style={styles.videoButtonLabel}>Video Explanation</Text>
-              <Text style={styles.videoButtonParts}>{videoIds.length} part{videoIds.length > 1 ? "s" : ""}</Text>
-            </View>
-            <Text style={styles.videoButtonArrow}>›</Text>
-          </Pressable>
-        )}
+        {/* Sharah + Video Buttons */}
+        <View style={styles.breakerButtons}>
+          {sharahSectionId !== null && (
+            <Pressable
+              onPress={() => router.push(`/sharah/${sharahSectionId}`)}
+              style={styles.sharahButton}
+            >
+              <View style={styles.sharahButtonIcon}>
+                <Text style={styles.sharahButtonGlyph}>❦</Text>
+              </View>
+              <View style={styles.sharahButtonText}>
+                <Text style={styles.sharahButtonLabel}>Read Sharah</Text>
+                <Text style={styles.sharahButtonParts} numberOfLines={1}>Sharahe Kalam-e-Raza</Text>
+              </View>
+            </Pressable>
+          )}
+
+          {videoIds && videoIds.length > 0 && (
+            <Pressable
+              onPress={() => { setActivePart(0); setPlaying(false); setVideoReady(false); setVideoOpen(true); }}
+              style={styles.videoButton}
+            >
+              <View style={styles.videoButtonIcon}>
+                <Text style={styles.videoButtonPlay}>▶</Text>
+              </View>
+              <View style={styles.videoButtonText}>
+                <Text style={styles.videoButtonLabel}>Video Explanation</Text>
+                <Text style={styles.videoButtonParts}>{videoIds.length} part{videoIds.length > 1 ? "s" : ""}</Text>
+              </View>
+            </Pressable>
+          )}
+        </View>
 
         {/* Verses with Premium Design */}
         <View style={styles.versesContainer}>
@@ -209,15 +231,15 @@ export default function KalamDetailScreen() {
           <View style={styles.reportModal}>
             {reportSent ? (
               <>
-                <Text style={styles.reportThanks}>{t.reportThanks[uiLang]}</Text>
+                <Text style={styles.reportThanks}>Thank you, your report has been saved.</Text>
                 <Pressable onPress={() => setReportOpen(false)} style={styles.reportCloseButton}>
                   <Text style={styles.reportCloseText}>OK</Text>
                 </Pressable>
               </>
             ) : (
               <>
-                <Text style={styles.reportTitle}>{t.reportCategory[uiLang]}</Text>
-                <Text style={styles.reportPrompt}>{t.chooseCategory[uiLang]}</Text>
+                <Text style={styles.reportTitle}>Report category</Text>
+                <Text style={styles.reportPrompt}>Choose the correct category</Text>
                 <View style={styles.reportOptions}>
                   {categories.map((category) => (
                     <Pressable
@@ -226,7 +248,7 @@ export default function KalamDetailScreen() {
                       style={[styles.reportOption, reportCategory === category && styles.reportOptionSelected]}
                     >
                       <Text style={[styles.reportOptionText, reportCategory === category && styles.reportOptionTextSelected]}>
-                        {t[category][uiLang]}
+                        {CATEGORY_LABELS[category]}
                       </Text>
                     </Pressable>
                   ))}
@@ -234,7 +256,7 @@ export default function KalamDetailScreen() {
                 <TextInput
                   value={reportNote}
                   onChangeText={setReportNote}
-                  placeholder={t.reportNotePlaceholder[uiLang]}
+                  placeholder="Optional note"
                   placeholderTextColor={colors.mist}
                   style={styles.reportInput}
                   multiline
@@ -260,7 +282,7 @@ export default function KalamDetailScreen() {
                     }}
                     style={[styles.reportSubmitButton, !reportCategory && styles.reportSubmitDisabled]}
                   >
-                    <Text style={styles.reportSubmitText}>{t.submitReport[uiLang]}</Text>
+                    <Text style={styles.reportSubmitText}>Submit report</Text>
                   </Pressable>
                 </View>
               </>
@@ -670,27 +692,70 @@ const styles = StyleSheet.create({
     color: colors.primaryDark,
     fontWeight: "700",
   },
-  videoButton: {
+  breakerButtons: {
+    flexDirection: "row",
+    gap: spacing.sm,
+    marginBottom: spacing.lg,
+  },
+  sharahButton: {
+    flex: 1,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(201, 168, 76, 0.12)",
-    borderRadius: borderRadius.xl,
-    padding: spacing.md,
-    marginBottom: spacing.lg,
+    borderRadius: borderRadius.lg,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.md,
+    borderWidth: 1,
+    borderColor: "rgba(201, 168, 76, 0.25)",
+  },
+  sharahButtonIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(201, 168, 76, 0.2)",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: spacing.sm,
+  },
+  sharahButtonGlyph: {
+    fontSize: 14,
+    color: colors.gold,
+  },
+  sharahButtonText: {
+    flex: 1,
+  },
+  sharahButtonLabel: {
+    fontSize: 13,
+    fontWeight: "600",
+    color: colors.goldLight,
+  },
+  sharahButtonParts: {
+    fontSize: 11,
+    color: "rgba(201, 168, 76, 0.6)",
+    marginTop: 1,
+  },
+  videoButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(201, 168, 76, 0.12)",
+    borderRadius: borderRadius.lg,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.md,
     borderWidth: 1,
     borderColor: "rgba(201, 168, 76, 0.25)",
   },
   videoButtonIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: "rgba(201, 168, 76, 0.2)",
     alignItems: "center",
     justifyContent: "center",
     marginRight: spacing.sm,
   },
   videoButtonPlay: {
-    fontSize: 14,
+    fontSize: 12,
     color: colors.gold,
   },
   videoButtonText: {
@@ -705,11 +770,6 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: "rgba(201, 168, 76, 0.6)",
     marginTop: 1,
-  },
-  videoButtonArrow: {
-    fontSize: 18,
-    color: colors.gold,
-    opacity: 0.5,
   },
   sheetBackdrop: {
     flex: 1,

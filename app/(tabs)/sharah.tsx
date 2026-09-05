@@ -1,8 +1,6 @@
 import { LangSwitcher } from "@/src/components/LangSwitcher";
 import { NastaliqText } from "@/src/components/NastaliqText";
 import { borderRadius, colors, spacing } from "@/src/constants/theme";
-import { t } from "@/src/constants/translations";
-import { useLang } from "@/src/contexts/LangContext";
 import { getToc, searchSharah } from "@/src/db/database";
 import type { BlockType, SearchResult, TocEntry } from "@/src/db/types";
 import { useSQLiteContext } from "expo-sqlite";
@@ -31,8 +29,6 @@ const BLOCK_LABEL: Record<BlockType, string> = {
 export default function SharahScreen() {
   const db = useSQLiteContext();
   const router = useRouter();
-  const { lang } = useLang();
-  const uiLang = lang === "ro" ? "en" : lang;
 
   const [toc, setToc] = useState<TocEntry[]>([]);
   const [search, setSearch] = useState("");
@@ -127,8 +123,8 @@ export default function SharahScreen() {
               />
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.headerTitle}>{t.sharahHeader[uiLang]}</Text>
-              <Text style={styles.headerSubtitle}>{t.sharahSubtitle[uiLang]}</Text>
+              <Text style={styles.headerTitle}>Sharahe Kalam-e-Raza</Text>
+              <Text style={styles.headerSubtitle}>Detailed Roman Urdu explanation</Text>
             </View>
           </View>
           <LangSwitcher />
@@ -140,7 +136,7 @@ export default function SharahScreen() {
           <TextInput
             value={search}
             onChangeText={setSearch}
-            placeholder={t.searchSharah[uiLang]}
+            placeholder="Search in Sharahe Kalam..."
             placeholderTextColor={colors.mist}
             style={styles.searchInput}
             autoCapitalize="none"
@@ -168,7 +164,7 @@ export default function SharahScreen() {
               </View>
             ) : (
               <Text style={styles.resultsCount}>
-                {results.length} {t.explanations[uiLang]}
+                {results.length} results
               </Text>
             )
           }
@@ -176,7 +172,7 @@ export default function SharahScreen() {
             !searching ? (
               <View style={styles.emptyWrap}>
                 <Text style={styles.emptyText}>
-                  {t.noSharahFound[uiLang]}
+                  No explanation found
                 </Text>
               </View>
             ) : null
@@ -226,7 +222,7 @@ export default function SharahScreen() {
                 </NastaliqText>
                 <View style={styles.tocFooter}>
                   <Text style={styles.tocMeta}>
-                    {item.blockCount} {t.versesAndNotes[uiLang]}
+                    {item.blockCount} verse & notes
                   </Text>
                   <Text style={styles.tocArrow}>›</Text>
                 </View>
