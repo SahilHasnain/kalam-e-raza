@@ -50,3 +50,4 @@ config.bat
 
 # reference (APK decompilation tools + data)
 reference/
+.opencode
