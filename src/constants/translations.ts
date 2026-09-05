@@ -207,4 +207,58 @@ export const t: Translations = {
     ro: "Thank you, your report has been saved.",
     en: "Thank you, your report has been saved.",
   },
+  sharahTab: {
+    ur: "شرح",
+    hi: "शरह",
+    ro: "Sharah",
+    en: "Sharah",
+  },
+  sharahHeader: {
+    ur: "شرحِ کلامِ رضا",
+    hi: "शरह-ए-कलाम-ए-रज़ा",
+    ro: "Sharahe Kalaam-e-Raza",
+    en: "Sharahe Kalam-e-Raza",
+  },
+  sharahSubtitle: {
+    ur: "مفصل اردو تشریح",
+    hi: "विस्तृत उर्दू व्याख्या",
+    ro: "Mufassal Roman Urdu sharah",
+    en: "Detailed Roman Urdu explanation",
+  },
+  searchSharah: {
+    ur: "شرح میں تلاش کریں...",
+    hi: "शरह में खोजें...",
+    ro: "Sharah me talash karein...",
+    en: "Search in Sharahe Kalam...",
+  },
+  noSharahFound: {
+    ur: "کوئی شرح نہیں ملی",
+    hi: "कोई शरह नहीं मिली",
+    ro: "Koi sharah nahi mili",
+    en: "No explanation found",
+  },
+  explanations: {
+    ur: "شرح",
+    hi: "शरह",
+    ro: "Sharah",
+    en: "Explanation",
+  },
+  versesAndNotes: {
+    ur: "اشعار و تشریح",
+    hi: "शेर और व्याख्या",
+    ro: "Ashaar aur sharah",
+    en: "verse & notes",
+  },
+  mushkilAlfaz: {
+    ur: "مشکل الفاظ",
+    hi: "कठिन शब्द",
+    ro: "Mushkil Alfaz",
+    en: "Difficult words",
+  },
+  mafhoom: {
+    ur: "مفہوم",
+    hi: "अर्थ",
+    ro: "Mafhoom",
+    en: "Meaning",
+  },
 };

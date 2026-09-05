@@ -37,6 +37,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="sharah"
+        options={{
+          title: "Sharah",
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused ? "book" : "book-outline"} size={22} color={focused ? colors.gold : colors.gray400} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="favorites"
         options={{
           title: "Favorites",
