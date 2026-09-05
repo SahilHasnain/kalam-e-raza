@@ -3,16 +3,16 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start",
+    "start": "node init && expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
     "tunnel": "expo start --tunnel",
-    "build:dev": "eas build --platform android --profile development",
-    "build:preview": "eas build --platform android --profile preview",
-    "build:prod": "eas build --platform android --profile production"
+    "build:dev": "node init && eas build --platform android --profile development",
+    "build:preview": "node init && eas build --platform android --profile preview",
+    "build:prod": "node init && eas build --platform android --profile production"
   },
   "dependencies": {
     "@expo-google-fonts/noto-nastaliq-urdu": "^0.4.2",
